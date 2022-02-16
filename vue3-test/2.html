@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <!-- 语法 -->
+  <!-- http://jspang.com/detailed?id=68 -->
+  <style>
+    .a{background-color: aqua;}
+    .b{background-color: blueviolet;}
+    .c{background-color:brown;}
+  </style>
+  <div id="app"></div>
+  <script>
+    const APP = Vue.createApp({
+      data() {
+        return {
+          dom: '<i>aaaa</i>',
+          value: 'dsfb',
+          count: 5,
+          log: '123123',
+          name: 'key',
+          event: 'mouseenter',
+          quantity: 1,
+          show: !1,
+          list: [1,2,31234,345,3456,46,757,8678,32],
+          obj: {
+            a:1,
+            b:2,
+            c: 3,
+            d: 'sdf'
+          }
+        }
+      },
+      methods: {
+        handleClick(){
+          this.dom = this.dom == 'click me' ? "ok fine" : "click me"
+          this.count--
+        },
+        getValue(){
+          console.log(this.log);
+        },
+        hanleBtn(e){
+          alert('stop ok')
+        },
+        quantityAdd(){
+          this.quantity++
+        },
+        listPush(){
+          this.list.push(Math.random())
+        }
+      },
+      template: `
+        <div>
+          <p v-on:click='handleClick' v-html="dom" v-once></p>
+          <p>{{count > 2 ? '大' : '小'}}</p>
+          <p>{{count}}</p>
+          <p>{{'aa' + 'cc'}}</p>
+          <p title="dom">{{count}}</p>
+          <p v-bind:title="message">{{count}}</p>
+          <p v-bind:title="value">{{count}}</p>
+          <p :title="value">v-bind 简写</p>
+          <p :[name]="value">v-bind 简写</p>
+          <p v-on:click="getValue">log: {{log}}</p>
+          <p @click="getValue">log: {{log}}</p>
+          <p @[event]="getValue">log: {{log}}</p>
+
+          <form action="http://www.baidu.com" @click.prevent="hanleBtn">
+            <button type="submit">提交</button>
+          </form>
+
+          <h2 class="a" v-if="quantity > 1">1:{{quantity}}</h2>
+          <h2 class="b" v-if="quantity > 2">2:{{quantity}}</h2>
+          <h2 class="c" v-if="quantity > 3">3:{{quantity}}</h2>
+          <h2 class="c" v-else>55:{{quantity}}</h2>
+          <button @click="quantityAdd">add</button>
+          
+          <h2 :class="quantity % 2 == 0 ? 'a':'b'">3:{{quantity}}</h2>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <p v-show="show">is show</p>
+          <p v-if="show">if show</p>
+
+          <ul>
+            <li v-for="(item, index) in list" :key="index+item">{{index}}: {{item}}</li>
+          </ul>
+          <button @click="listPush">listPush</button>
+
+          <ol>
+            <li v-for="(value, key, index) in obj" :key="index+key">{{value}}, {{key}}, {{index}}</li>
+          </ol>
+
+          <div>
+            <template v-for="count in 99" :key="index+item">
+              <span v-if="count > 2">
+                {{count}},
+              </span>
+            </template>
+          </div>
+
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+      `
+    })
+
+    const vm = APP.mount("#app")
+  </script>
+</body>
+
+</html>

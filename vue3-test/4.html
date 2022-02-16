@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <!-- 语法 -->
+  <!-- http://jspang.com/detailed?id=68 -->
+  <style>
+    .a{background-color: aqua;}
+    .b{background-color: blueviolet;}
+    .c{background-color:brown;}
+    .red{color: red;}
+    .green{color: green;}
+    .bg{background-color:orange;}
+  </style>
+  <div id="app"></div>
+  <script>
+    const APP = Vue.createApp({
+      data() {
+        return {
+          value: 'dsfb',
+          classStr: 'green',
+          classObj: {
+            red: true,
+            bg: true,
+          },
+          classArr: ['red', {green: true}, 'bg'],
+          styleStr: 'color: #996844',
+          styleObj: {
+            color: 'red',
+            background: 'blue'
+          },
+        }
+      },
+      methods: {
+        handleClick(){
+        },
+      },
+      template: `
+        <div>
+          <p class="red">value: {{value}}</p>
+          <br>
+          <p :class="classStr">value: {{value}}</p>
+          <input v-model="classStr" />
+          <br>
+          <p :class="classObj">value: {{value}}</p>
+          <br>
+          <p :class="classArr">value: {{value}}</p>
+          <br>
+          <br>
+          <sonCom class="red" :style="styleStr"></sonCom>
+          <br>
+          <p :style="styleObj">sdfgsdfg</p>
+        </div>
+      `
+    })
+
+    APP.component('sonCom', {
+      template: `
+        <div>
+          <div class="">son - 1</div>
+          <div class="green">son - 1 - 1</div>
+        </div>
+      `
+    })
+
+    const vm = APP.mount("#app")
+  </script>
+</body>
+
+</html>

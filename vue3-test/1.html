@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <!-- 周期函数 -->
+  <!-- http://jspang.com/detailed?id=68 -->
+  <div id="app"></div>
+  <script>
+    const APP = Vue.createApp({
+      data() {
+        return {
+          msg: 'click me'
+        }
+      },
+      beforeCreate(){
+        // 在实例生成之前触发
+        console.log('before create')
+      },
+      created(){
+        // 在实例生成之后触发
+        console.log('created');
+      },
+      beforeMount(){
+        // 有模版属性时触发
+        // 在模版挂载(渲染)之前
+        console.log('before mount');
+      },
+      mounted() {
+        // 有模版属性时触发
+        // 所有的挂载(渲染)完成之后
+        console.log('mounted')
+      },
+      beforeUpdate(){
+        // dom更新时触发
+        console.log('before update')
+      },
+      updated(){
+        // dom更新完触发
+        console.log('updated')
+      },
+      beforeUnmount(){
+        // 当vue失效时
+        console.log('before unmount');
+        // console.log(document.getElementById('app').innerHTML);
+      },
+      unmounted(){
+        // dom卸载完后
+        console.log('unmounted');
+        // console.log(document.getElementById('app').innerHTML);
+      },
+      methods: {
+        handleClick(){
+          this.msg = this.msg == 'click me' ? "ok fine" : "click me"
+        },
+        handleUnmount(){
+          APP.unmount()
+        }
+      },
+      template: `
+        <div>
+          <p v-on:click='handleClick'>{{msg}}</p>
+          <p v-on:click='handleUnmount'>unmount</p>
+        </div>
+      `
+    })
+
+    const vm = APP.mount("#app")
+  </script>
+</body>
+
+</html>

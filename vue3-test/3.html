@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <!-- 语法 -->
+  <!-- http://jspang.com/detailed?id=68 -->
+  <style>
+    .a{background-color: aqua;}
+    .b{background-color: blueviolet;}
+    .c{background-color:brown;}
+  </style>
+  <div id="app"></div>
+  <script>
+    const APP = Vue.createApp({
+      data() {
+        return {
+          dom: '<i>aaaa</i>',
+          value: 'dsfb',
+          count: 5,
+          log: '123123',
+          name: 'key',
+          event: 'mouseenter',
+          quantity: 1,
+          price: 10,
+          num: 3,
+          newTotal: 20
+        }
+      },
+      watch: {
+        // 监听器
+        // 只在变化时调用
+        num(current, prev){
+          console.log('current:', current, ' prev:', prev);
+          console.log('change num');
+          this.newTotal = this.price * this.num
+        }
+      },
+      computed: {
+        // 计算属性
+        // 可以结局很多性能问题
+        // 当页面刷新的时候调用
+        totle(){
+          // 重新渲染的时候不会再次执行
+          // return this.price * this.num
+          console.log('```');
+          return Date.now()
+        }
+      },
+      methods: {
+        handleClick(){
+          this.dom = this.dom == 'click me' ? "ok fine" : "click me"
+          this.count--
+        },
+        getValue(){
+          console.log(this.log);
+        },
+        hanleBtn(e){
+          alert('stop ok')
+        },
+        add(){
+          this.num++
+        },
+        getTotle(){
+          // 只要页面重新渲染就会再次执行方法
+          // return this.price * this.num
+          return Date.now()
+        }
+      },
+      template: `
+        <div>
+          <p>mes: {{dom}}</p>
+          <p>*: {{price * num}}</p>
+          <p>totle: {{totle}}</p>
+          <p>getTotle: {{getTotle()}}</p>
+          <button @click="add">add</button>
+
+          <p>newTotal: {{newTotal}}</p>
+        </div>
+      `
+    })
+
+    const vm = APP.mount("#app")
+  </script>
+</body>
+
+</html>

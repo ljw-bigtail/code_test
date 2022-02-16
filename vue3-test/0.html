@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <!-- vue3 能做什么 -->
+  <!-- http://jspang.com/detailed?id=68 -->
+  <div id="app"></div>
+  <script>
+    // mvvm model view ViewModel
+    // model + view => ViewModel
+    const APP = Vue.createApp({
+      data() { // model
+        return {
+          test: 0,
+          content: 'welcome',
+          isShow: false,
+          list: ['q', 'w', 'e', 'r'],
+          itemValue: ''
+        }
+      },
+      mounted() {
+        console.log('mounted')
+        setInterval(() => {
+          this.test += 1
+        }, 1000)
+      },
+      methods: {
+        method1() {
+          console.log('a1');
+          this.content = 'a1'
+        },
+        method2() {
+          console.log('b2');
+          this.content = 'b2'
+        },
+        showOrHide() {
+          this.isShow = !this.isShow
+        },
+        addItem() {
+          this.list.push(parseInt(Math.random() * 100))
+        },
+        addValue() {
+          this.list.push(this.itemValue)
+          this.itemValue = ''
+        }
+      },
+      // view
+      template: `
+                <div>test: {{test}}</div>
+                <div>
+                    <p v-if="isShow">test: {{content}}</p>
+                    <button v-on:click="method1">aaa</button>
+                    <button v-on:click="method2">bbb</button>
+                    <button v-on:click="showOrHide">显示/隐藏</button>
+                </div>
+                <div>
+                    <ol>
+                        <li v-for="(item, index) of list">{{item}} [{{index}}]</li>
+                    </ol>
+                    <ul>
+                        <my-item v-for="(item, index) of list" v-bind:item="item" v-bind:index="index" />
+                    </ul>
+                    <input v-model="itemValue">
+                    <button v-on:click="addItem">add item radom</button>
+                    <button v-on:click="addValue">add item value</button>
+                </div>
+                <div>
+                    <my-title />
+                </div>
+            `
+    })
+
+    APP.component('my-title', {
+      template: `<h4>title - child</h4>`
+    })
+
+    APP.component('my-item', {
+      props: ['item', 'index'],
+      template: `<li>{{item}} [{{index}}]</li>`
+    })
+
+    APP.mount("#app") // ViewModel
+  </script>
+</body>
+
+</html>
