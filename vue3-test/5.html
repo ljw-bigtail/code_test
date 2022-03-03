@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <style>
+    .a{background-color: aqua;}
+    .b{background-color: blueviolet;}
+    .c{background-color:brown;}
+    .red{color: red;}
+    .green{color: green;}
+    .bg{background-color:orange;}
+  </style>
+  <div id="app"></div>
+  <script>
+    const app = Vue.createApp({
+	data(){
+		return {
+			list:[{name: 'zhang3', val: 3},{name: 'li4', val: 4}]
+		}
+	},
+	template: `
+		<div>
+			<blog-post v-for="(item, index) in list" :key="item.name" 
+				:name="item.name" :val="item.val"
+				@blog-change="blogChange($event, index)"
+				v-model="item.val"
+			>
+				另一种传递值的途径  value={{item.val}}
+			</blog-post>
+		</div>
+	`,
+	methods:{
+		blogChange(val,index){
+			// 自定义事件的响应，如果不需要父组件中的参数，即这里不需要index的情况，@blog-change="blogChange"即可
+			this.list[index].val = val
+		}
+	}
+})
+// 全局组件
+app.component('blog-post', {
+	props: ['name','val','modelValue'],
+	emits: ['blogChange', 'update:modelValue'], 
+	template: `
+		<div>
+			<h4>{{ name }}</h4>
+			<span>{{ val }}</span>
+			<button @click="handleClick">add</button>
+			<input @input="handleChange" />
+			<slot></slot>
+		</div>
+	`,
+	methods:{
+		handleClick(){
+			// 触发自定义事件
+			this.$emit('blogChange', this.val + 1, this.name) // 父组件使用$event 接收$emit传递的第二个值，所以这里的this.name父组件是收不到的
+		},
+		handleChange(event){
+			// 双向绑定
+			this.$emit('update:modelValue', parseInt(event.target.value)) // update:modelValue 为固定值，props中的modelValue也=同样。parseInt与双向绑定无关
+			// 另一种实现方法是@input换成computed，modelValue、update:modelValue不变
+		}
+	}
+})
+const vm = app.mount("#app")
+  </script>
+</body>
+
+</html>

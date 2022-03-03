@@ -1,0 +1,192 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .outer{background: black;height:100px;}
+    .left{background: tomato;width:100px;height:100px;}
+    .right{background: gold;width:200px;height:100px;}
+    .center{background: lightgreen;height:100px}
+    /* grid */
+    .outer{display: grid;grid-template-rows:100px;grid-template-columns: 100px auto 200px;grid-gap: 0;}
+  </style>
+</head>
+<body>
+  <div class="outer">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+    <body>
+        <ul>
+            <li>全选<input type='checkbox' id='all'></li>
+            <li>Java<input type='checkbox' class='item'></li>
+            <li>javaScript<input type='checkbox' class='item'></li>
+            <li>C++<input type='checkbox' class='item'></li>
+            <li>python<input type='checkbox' class='item'></li>
+            <li>.net<input type='checkbox' class='item'></li>
+        </ul>
+
+        <script>
+            let all = document.querySelector('#all')
+            let options = Array.from(document.querySelectorAll('.item'))
+            all.onchange = function(){
+                options.forEach(e=>e.checked = all.checked)
+            }
+            options.forEach(e=>{
+                e.onchange = function(){
+                  all.checked = !this.checked ? false : options.every(_e=>_e.checked)
+                }
+            })
+        </script>
+    </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+        <ul></ul>
+
+        <script>
+            var ul = document.querySelector('ul');
+            var person = { sex: '男', age: '25', name: '王大锤', height: 28, weight: 32 };
+            const _render = element => {
+                var str = `<li>姓名：<span>${person.name}</span></li>
+                           <li>性别：<span>${person.sex}</span></li>
+                           <li>年龄：<span>${person.age}</span></li>
+                           <li>身高：<span>${person.height}</span></li>
+                           <li>体重：<span>${person.weight}</span></li>`
+                element.innerHTML = str;
+            }
+            _render(ul);
+            // 补全代码
+            Object.keys(person).forEach(key=>{
+              let value=person[key]
+                Object.defineProperty(person, key, {
+                    get(){
+                        return value
+                    },
+                    set(val){
+                        if(val != value){
+                          value = val
+                          _render(ul);
+                       }
+                    }
+                })    
+            })
+        </script>
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	<table>
+            <thead>
+                <caption>
+                    商品
+                </caption>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>炸鸡</td>
+                    <td>28元</td>
+                    <td><button id="zjtaiduola">-</button></td>
+                    <td><span id="zjsl">0</span></td>
+                    <td><button id="zjtaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>可乐</td>
+                    <td>5元</td>
+                    <td><button id="kltaiduola">-</button></td>
+                    <td><span id="klsl">0</span></td>
+                    <td><button id="kltaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>总价：</td>
+                    <td><span id="total">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <script type="text/javascript">
+            // 补全代码
+            let zjtaiduola = document.querySelector('#zjtaiduola')
+            let zjsl = document.querySelector('#zjsl')
+            let zjtaishaola = document.querySelector('#zjtaishaola')
+            let kltaiduola = document.querySelector('#kltaiduola')
+            let klsl = document.querySelector('#klsl')
+            let kltaishaola = document.querySelector('#kltaishaola')
+            let total = document.querySelector('#total')
+            let price = {
+                zj: 0,
+                kl: 0
+            }
+            let _zj = price.zj
+            Object.defineProperty(price, 'zj', {
+              get(){
+                return _zj
+              },
+                set(val){
+                  _zj = val
+                  renderTotal()
+                }
+            })
+            let _kl = price.kl 
+            Object.defineProperty(price, 'kl', {
+              get(){
+                return _kl
+              },
+                set(val){
+                  _kl = val
+                  renderTotal()
+                }
+            })
+            function renderTotal(){
+              zjsl.innerText = _zj
+              klsl.innerText = _kl
+              total.innerText = (_zj * 28 + _kl * 5).toString()
+            }
+            
+            zjtaiduola.onclick = function(){
+                price.zj--
+            }
+            zjtaishaola.onclick = function(){
+                price.zj++
+            }
+            kltaiduola.onclick = function(){
+                price.kl--
+            }
+            kltaishaola.onclick = function(){
+                price.kl++
+            }
+        </script>
+    </body>
+</html>
