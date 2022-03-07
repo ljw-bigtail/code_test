@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>原生事件</title>
+    </head>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+    <body>
+        <ul>
+            <li>全选<input type='checkbox' id='all'></li>
+            <li>Java<input type='checkbox' class='item'></li>
+            <li>javaScript<input type='checkbox' class='item'></li>
+            <li>C++<input type='checkbox' class='item'></li>
+            <li>python<input type='checkbox' class='item'></li>
+            <li>.net<input type='checkbox' class='item'></li>
+        </ul>
+
+        <script>
+            let all = document.querySelector('#all')
+            let options = Array.from(document.querySelectorAll('.item'))
+            all.onchange = function(){
+                options.forEach(e=>e.checked = all.checked)
+            }
+            options.forEach(e=>{
+                e.onchange = function(){
+                  all.checked = !this.checked ? false : options.every(_e=>_e.checked)
+                }
+            })
+        </script>
+    </body>
+</html>

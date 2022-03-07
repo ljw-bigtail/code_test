@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <title>Vue2的原理：Object.defineProperty</title>
+    </head>
+    <body>
+    	<table>
+            <thead>
+                <caption>
+                    商品
+                </caption>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>炸鸡</td>
+                    <td>28元</td>
+                    <td><button id="zjtaiduola">-</button></td>
+                    <td><span id="zjsl">0</span></td>
+                    <td><button id="zjtaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>可乐</td>
+                    <td>5元</td>
+                    <td><button id="kltaiduola">-</button></td>
+                    <td><span id="klsl">0</span></td>
+                    <td><button id="kltaishaola">+</button></td>
+                </tr>
+                <tr>
+                    <td>总价：</td>
+                    <td><span id="total">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <script type="text/javascript">
+            // 补全代码
+            let zjtaiduola = document.querySelector('#zjtaiduola')
+            let zjsl = document.querySelector('#zjsl')
+            let zjtaishaola = document.querySelector('#zjtaishaola')
+            let kltaiduola = document.querySelector('#kltaiduola')
+            let klsl = document.querySelector('#klsl')
+            let kltaishaola = document.querySelector('#kltaishaola')
+            let total = document.querySelector('#total')
+            let price = {
+                zj: 0,
+                kl: 0
+            }
+            let _zj = price.zj
+            Object.defineProperty(price, 'zj', {
+              get(){
+                return _zj
+              },
+                set(val){
+                  _zj = val
+                  renderTotal()
+                }
+            })
+            let _kl = price.kl 
+            Object.defineProperty(price, 'kl', {
+              get(){
+                return _kl
+              },
+                set(val){
+                  _kl = val
+                  renderTotal()
+                }
+            })
+            function renderTotal(){
+              zjsl.innerText = _zj
+              klsl.innerText = _kl
+              total.innerText = (_zj * 28 + _kl * 5).toString()
+            }
+            
+            zjtaiduola.onclick = function(){
+                price.zj--
+            }
+            zjtaishaola.onclick = function(){
+                price.zj++
+            }
+            kltaiduola.onclick = function(){
+                price.kl--
+            }
+            kltaishaola.onclick = function(){
+                price.kl++
+            }
+        </script>
+    </body>
+</html>
