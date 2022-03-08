@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIP</title>
+    <style>
+        .square{position: fixed;background-color: silver;} /* 初始帧 */
+        .frameIn{height: 180px;width: 90px;top: 200px; left: 170px;}
+        .frameOut{height: 280px;width: 190px;top: 80px; left: 320px;}
+    </style>
+</head>
+<body>
+    <div class="square"></div>
+    <script>
+        function slibingsFrame(dom, classIn, classOut){
+            const options = {
+                duration: 300,
+                easing: 'ease-in-out',
+                fill: 'both'
+            }
+            const first = square.getBoundingClientRect();
+            let isIn = false
+            if(dom.classList.value.includes(classIn)){
+                dom.classList.remove(classIn)
+                dom.classList.add(classOut)
+                isIn = false
+            }else{
+                dom.classList.add(classIn)
+                dom.classList.remove(classOut)
+                isIn = true
+            }
+            const last = square.getBoundingClientRect();
+            const deltaX = first.left - last.left;
+            const deltaY = first.top - last.top;
+            const deltaW = first.width / last.width;
+            const deltaH = first.height / last.height;
+            const framesTo = {
+                transformOrigin: ['top left', 'top left'],
+                transform: [`translate(${deltaX}px, ${deltaY}px) scale(${deltaW}, ${deltaH})`, 'none']
+            }
+            dom.animate(framesTo, options)
+        }
+        const square = document.querySelector('.square')
+        document.onclick = function(){
+            slibingsFrame(square, 'frameIn', 'frameOut')
+        }
+    </script>
+</body>
+</html>
