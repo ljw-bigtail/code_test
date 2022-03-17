@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>算法题</title>
+</head>
+<body>
+  <script>
+    function upstairs(n){
+      if(n <= 0)return false
+      if(n === 1 || n === 2)return n
+      var a = n - 1, b = n - 2;
+      if(n === 3) return a + b
+      return upstairs(a) + upstairs(b)
+    }
+    function upstairs_1(n){
+      var arr = [1, 2, 3]
+      for (let i = 3; i < n; i++) {
+        arr[i] = arr[i-2] + arr[i-1]
+      }
+      return arr[n-1]
+    }
+
+    
+    function uniquePaths(m, n){
+      // 生成一个m行n列 由0填充的二维数组
+      var arr = new Array(m).fill(0).map(e=>new Array(n).fill(0))
+      // 根据已知条件可知第一行、第一列都应该由1填充（走到这些点点可能性都只有一种）
+      for (let i = 0; i < n; i++) {
+        arr[0][i] = 1
+      }
+      for (let i = 0; i < m; i++) {
+        arr[i][0] = 1
+      }
+      // 根据f(n,m) = f(n-1,m) + f(n, m-1) 填充余下位
+      for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+          arr[i][j] = arr[i-1][j] + arr[i][j-1]
+        } 
+      }
+      return arr[m - 1][n - 1]
+    }
+    function uniquePaths_1(m, n){
+      function jiecheng(x){
+        var arr = []
+        for (let i = 1; i <= x; i++) {
+          arr.push(i)
+        }
+        return arr.reduce((sum, e)=>sum*e)
+      }
+      return jiecheng(m+n-2) / (jiecheng(m-1) * jiecheng(n-1))
+    }
+    function uniquePaths_2(m, n){
+      let num = 1
+      for (let x = n, y = 1; y < m; ++x, ++y) {
+        num = Math.floor(num * x / y)        
+      }
+      return num
+    }
+    var m = 10, n = 4;
+    console.log(uniquePaths(m,n) == uniquePaths_1(m,n))
+
+
+    function maxChildArrSum(array){
+      var sum = 0, // 指最后的最大和
+          _sum = 0; // 当前指向的项 之前累加的和
+      array.forEach(e=>{
+        _sum += e // 累加
+        if(_sum < 0){
+          _sum = 0 // 如果累加数小于0 舍弃
+        }
+        sum = Math.max(sum, _sum) // 如果累加的项大于最大值，替换
+      })
+      return sum
+    }
+    function maxChildArrSum1(array){
+      var sum = array[0], // 指最后的最大和
+          _sum = 0; // 指当前的和
+      for (let i = 1; i < array.length; i++) {
+        _sum = Math.max(_sum + array[i], array[i])
+        sum = Math.max(sum, _sum)
+      }
+      return sum
+    }
+
+  </script>
+</body>
+</html>
