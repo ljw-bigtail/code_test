@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>components demo</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="../dist/index.js"></script>
+  <script>
+      var hotzones = new Hotzones([{
+      img: {
+        src: 'https://ups.aopcdn.com/s894/common/18975/884u03ced30791c045129d66a16c4a201e41.jpg',
+        width: 1480,
+        height: 179,
+      },
+      area: [{
+        coords: [194,79,366,122],
+        copyVal: 'WG60',
+        data: {
+          a: 'qwe'
+        },
+      },{
+        coords: [543,77,719,125],
+        copyVal: 'WG30',
+        data: {
+          a: 'asd'
+        },
+      },{
+        coords: [899,79,1068,126],
+        copyVal: 'WG15',
+        data: {
+          a: 'zxc'
+        },
+      },{
+        coords: [1255,80,1428,123],
+        copyVal: 'WG6',
+        data: {
+          a: 'fgh'
+        },
+      }]
+    },{
+      img: {
+        src: 'https://ups.aopcdn.com/s894/common/18975/884u03ced30791c045129d66a16c4a201e41.jpg',
+        width: 1480,
+        height: 179,
+      },
+      area: [{
+        coords: [194,79,366,122],
+        copyVal: 'WG60',
+        type: 'copy',
+      },{
+        coords: [543,77,719,125],
+        copyVal: 'WG30',
+        type: 'copy',
+      },{
+        coords: [899,79,1068,126],
+        copyVal: 'WG15',
+        type: 'copy',
+      },{
+        coords: [1255,80,1428,123],
+        copyVal: 'WG6',
+        type: 'copy',
+     }]
+    }], {
+      type: 'click',
+      domSelector: '#app',
+      shape: 'rect',
+      callback: function(res){
+        console.log(res);
+      }
+    })
+    console.log(hotzones);
+  </script>
+</body>
+</html>
