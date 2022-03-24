@@ -86,7 +86,7 @@ class Hotzones {
             if (!areaData)
                 return;
             const coords_data = areaData.coords.map((coords_item) => {
-                return parseInt(coords_item) * scale;
+                return coords_item * scale;
             });
             // 设置新热区位置
             area_item.setAttribute('coords', coords_data.join());

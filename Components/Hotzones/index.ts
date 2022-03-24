@@ -98,7 +98,7 @@ class Hotzones {
     const that = this
     area_elements.forEach((element: HTMLElement) => {
       element.onclick = function(e){
-        const areaData: HotzoneArea = that.getAreaData(e.target as HTMLElement)
+        const areaData: HotzoneArea | undefined = that.getAreaData(e.target as HTMLElement)
         if(!areaData) return
         const type: ClickEvent = areaData.type || that.options.type || 'href'
         if(type == 'copy'){
@@ -124,8 +124,8 @@ class Hotzones {
     area_elements.forEach((area_item: HTMLElement) => {
       const areaData: HotzoneArea | undefined = that.getAreaData(area_item as HTMLElement)
       if(!areaData) return
-      const coords_data: number[]  = areaData.coords.map((coords_item: string) => {
-        return parseInt(coords_item) * scale
+      const coords_data: number[]  = areaData.coords.map((coords_item: number) => {
+        return coords_item * scale
       })
       // 设置新热区位置
       area_item.setAttribute('coords', coords_data.join())
