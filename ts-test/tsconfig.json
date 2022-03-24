@@ -1,0 +1,101 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    /* Projects */
+    // "incremental": true,                              /* 增量编译 */
+    // "composite": true,                                /* 组合模式 */
+    // "tsBuildInfoFile": "./",                          /* 增量编译文件存储位置 */
+    // "disableSourceOfProjectReferenceRedirect": true,  /* 组合模式下，不用源文件，使用 .d.ts 文件 */
+    // "disableSolutionSearching": true,                 /* 热更新时不完整编译整个项目 Opt a project out of multi-project reference checking when editing. */
+    // "disableReferencedProjectLoad": true,             /* 热更新时减少更新频率 Reduce the number of projects loaded automatically by TypeScript. */
+
+    /* Language and Environment */
+    "target": "es6",                                  /* 目标js版本，默认ES3 */
+    // "lib": [],                                        /* 编译中需要饮用的库列表；target=ES5默认为DOM，ES5，ScriptHost，target=ES6默认为target ES6：DOM，ES6，DOM.Iterable，ScriptHost */
+    // "jsx": "preserve",                                /* 支持的jsx模式  preserve为保留jsx文件 react为使用React.createElement */
+    // "experimentalDecorators": true,                   /* 启用试验性的ES装饰器 */
+    // "emitDecoratorMetadata": true,                    /* 支持元数据反射（ES7） */
+    // "jsxFactory": "",                                 /* 配置jsx工厂函数使用React.createElement 或 h */
+    // "jsxFragmentFactory": "",                         /* 配置jsx片段使用React.Fragment 或 Fragment */
+    // "jsxImportSource": "",                            /* 配置导入的jsx工厂函数的模块 `jsx: react-jsx*` */
+    // "reactNamespace": "",                             /* 使用react、jsx时，配置createElement的调用对象  */
+    // "noLib": true,                                    /* 不使用默认的库文件 lib.d.ts. */
+    // "useDefineForClassFields": true,                  /* 在class中声明的字段，使用 Object.defineProperty 来定义 */
+
+    /* Modules */
+    "module": "commonjs",                                /* 使用commonjs模式引入模块 */
+    // "rootDir": "./",                                  /* 指定输入文件目录 */
+    // "moduleResolution": "node",                       /* 配置模块解析侧策略 */
+    // "baseUrl": "./",                                  /* 配置非相对路径引入模块时的默认根目录 */
+    // "paths": {},                                      /* 模块-模块路径 映射 */
+    // "rootDirs": [],                                   /* 配置源文件有多路径的情况 */
+    // "typeRoots": [],                                  /* 声明文件目录 默认是 ./node_modules/@types. */
+    // "types": [],                                      /* 声明文件包 */
+    // "allowUmdGlobalAccess": true,                     /* 允许在模块中访问UMD全局变量 */
+    // "resolveJsonModule": true,                        /* 允许导入.json文件 */
+    // "noResolve": true,                                /* 不编译 import, require or <reference> 导入的文件 */
+
+    /* JavaScript Support */
+    // "allowJs": true,                                  /* 允许编译JS文件 */
+    // "checkJs": true,                                  /* 编译js文件时，允许抛出错误 */
+    // "maxNodeModuleJsDepth": 1,                        /* nodemoudule 最大搜索深度 */
+
+    /* Emit */
+    // "declaration": true,                              /* 生成 .d.ts 文件 */
+    // "declarationMap": true,                           /* 给 .d.ts 文件 增加 sourcemap */
+    // "emitDeclarationOnly": true,                      /* 只生成 .d.ts 文件 不生成 js 文件 */
+    // "sourceMap": true,                                /* 生成.map文件 */
+    // "outFile": "./",                                  /* 输出的文件名 */
+    "outDir": "./dist",                               /* 输出的文件目录 */
+    "removeComments": true,                           /* 去掉注释 */
+    // "noEmit": true,                                   /* 不生成输出文件 */
+    // "importHelpers": true,                            /* 全局导入tslib */
+    // "importsNotUsedAsValues": "remove",               /* 配置没有使用的导入语句应该如何处理  默认 remove 丢弃, preserve 保留, error 保留并允许抛出错误 */
+    // "downlevelIteration": true,                       /* 遍历器 iteration 的降级实现 （es3、es5） */
+    // "sourceRoot": "",                                 /* 给ts文件加源文件路径 sourcemap */
+    // "mapRoot": "",                                    /* 指定上面生成的sourcemap路径 */
+    // "inlineSourceMap": true,                          /* 合并生成的souecmap */
+    // "inlineSources": true,                            /* 将代码与sourcemao生成到一个文件里 */
+    // "emitBOM": true,                                  /* 在生成的文件开头加BOM头（UTF-8 Byte Order Mark） */
+    // "newLine": "crlf",                                /* 指定行结束符是crlf 还是 lf */
+    // "stripInternal": true,                            /* 不对具有 /** @internal */ JSDoc注解的代码生成代码。 */
+    // "noEmitHelpers": true,                            /* 不在输出文件中生成用户自定义的帮助函数代码 */
+    // "noEmitOnError": true,                            /* 报错时不输出 */
+    // "preserveConstEnums": true,                       /* 保留 const 和 enum 声明 */
+    // "declarationDir": "./",                           /* 声明文件的输出路径 */
+    // "preserveValueImports": true,                     /* 是否保留没有使用的变量 */
+
+    /* Interop Constraints */
+    // "isolatedModules": true,                          /* 是否保证模块可以单独使用 */
+    // "allowSyntheticDefaultImports": true,             /* 是否允许 import from 没有 export default 的模块 */
+    "esModuleInterop": true,                             /* 允许 export = XX */
+    // "preserveSymlinks": true,                         /* 不把符号链接解析为其真实路径 */
+    "forceConsistentCasingInFileNames": true,            /* 禁止对同一个文件的不一致的引用 */
+
+    /* Type Checking */
+    "strict": true,                                      /* 启用严格的检查选项 */
+    // "noImplicitAny": true,                            /* 禁止表达式和声明上有 隐含的 any */
+    // "strictNullChecks": true,                         /* null和undefined不包含在其他类型中，除了 void-undefined  */
+    // "strictFunctionTypes": true,                      /* 禁止函数参数双向协变 */
+    // "strictBindCallApply": true,                      /* 严格检查bind、apply、call的参数是否与目标函数匹配 */
+    // "strictPropertyInitialization": true,             /* 类的实例属性必须初始化 */
+    // "noImplicitThis": true,                           /* 禁止this表达式的值为any */
+    // "useUnknownInCatchVariables": true,               /* Type catch clause variables as 'unknown' instead of 'any'. */
+    // "alwaysStrict": true,                             /* 自动生成 use strict 语句 */
+    // "noUnusedLocals": true,                           /* 禁止有未使用的局部变量 */
+    // "noUnusedParameters": true,                       /* 禁止有未使用的参数 */
+    // "exactOptionalPropertyTypes": true,               /* 明确定义的类型不支持赋值为 undefined */
+    // "noImplicitReturns": true,                        /* 禁止函数没有 return */
+    // "noFallthroughCasesInSwitch": true,               /* 禁止switch中不合理使用break */
+    // "noUncheckedIndexedAccess": true,                 /* 使用索引访问属性时，该类型可能（没有定义类型等情况）被加上索引 */
+    // "noImplicitOverride": true,                       /* 使用 override 时，原型链上一定要有重名参数 */
+    // "noPropertyAccessFromIndexSignature": true,       /* 允许一个类型有一个字符串索引的时候，使用点式调用 */
+    // "allowUnusedLabels": true,                        /* 允许未使用的标签错误 */
+    // "allowUnreachableCode": true,                     /* 允许执行不到的代码错误 */
+
+    /* Completeness */
+    // "skipDefaultLibCheck": true,                      /* 忽略库的声明文件的类型检查 */
+    "skipLibCheck": true                                 /* 忽略所有的声明文件（ *.d.ts）的类型检查。 */
+  }
+}
