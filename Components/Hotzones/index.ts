@@ -49,7 +49,7 @@ class Hotzones {
     this.options = options
     this.init()
   }
-  init(){
+  init(): void{
     this.initDom()
     this.reloadCoords()
     this.initEvent()
