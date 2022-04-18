@@ -7,6 +7,60 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+    var Book = function(name, content, pages){
+      this.name = name
+      this._pages = pages // 约定俗成 参数、方法前面增加一个下划线的，认为是私有的，虽然在代码中还是公开的
+      function check(){} // 或者使用闭包来真实的控制不可以被外部访问，但是这种比较消耗内存，每个实例化都需要把私有部分占据一份内存
+    }
+    // 或者直接使用闭包，这种写法在内存中只存放一份
+    var Book = (function(){
+      this.name = name // 私有
+      return function(name, content, pages){
+        this.pages = pages // 私有
+        this.check = () => {} // 私有
+      }
+    })()
+
+    // 链式调用
+    // 伪代码
+    Function.prototype.method = function(name, fn){ // 原型链上添加函数
+      this.prototype[name] = fn
+      return this // 链式
+    };
+    (function(){
+      function _$(els){
+        this.elements = [];
+        for (let i = 0; i < els.length; i++) {
+          let element = els[i];
+          if(typeof element === 'string'){
+            element = document.getElementById(element) // 伪代码，要模仿jq还需要更复杂的操作
+          }
+          this.elements.push(element)
+        }
+      }
+      // 链式增加方法
+      _$
+      .method('addEvent', function(){
+        // ...
+        return this // 链式调用
+      })
+      .method('rmEvent', function(){
+        // ...
+      })
+      // 绑定到全局对象上，但是可能覆盖其他同名全局变量，需要支持可以自定义变量名称
+      // window.$ = function(){
+      //   return new _$()
+      // }
+      // 自定义变量名称
+      window.installHellper = function(scope, interface){
+        scope[interface] = function(){
+          return new _$(arguments)
+        }
+      }
+    })()
+    // 自定义变量使用
+    installHellper(window, '$')
+  </script>
 </body>
 </html>
