@@ -1,11 +1,10 @@
-/*
-功能：根据参数 渲染多个可以自定义（map）点击的图片。
-支持页面缩放；支持自定义事件、复制功能、链接跳转功能
-*/
-type ClickEvent = 'copy' | 'click' | 'href'
-type AreaShape = 'default' | 'rect' | 'circle' | 'poly'
-type CallBack = () => void
-type CallBackSuccess = (data: any) => void
+/**
+ * 功能：根据参数 渲染多个可以自定义（map）点击的图片。
+ * 支持页面缩放；支持自定义事件、复制功能、链接跳转功能
+**/
+
+type HotzoneAreaClickEvent = 'copy' | 'click' | 'href'
+type HotzoneAreaShape = 'default' | 'rect' | 'circle' | 'poly'
 
 interface HotzoneImg {
   src: string,
@@ -15,10 +14,10 @@ interface HotzoneImg {
 }
 
 interface HotzoneArea {
-  shape?: AreaShape,
+  shape?: HotzoneAreaShape,
   coords: number[],
-  type?: ClickEvent, // 覆盖options中的type
-  hrefOptions?: {
+  type?: HotzoneAreaClickEvent, // 覆盖options中的type
+  hrefHotzoneOptions?: {
     target: '_blank' | '_self' |  '_parent' | '_top',
     url: string
   },
@@ -31,19 +30,19 @@ interface Hotzone {
   area: HotzoneArea[]
 }
 
-interface Options {
-  type?: ClickEvent, // 可操作类型
-  domSelector: 'string', // dom 选择 querySelector
-  shape?: AreaShape,
-  callback?: CallBackSuccess
+interface HotzoneOptions {
+  type?: HotzoneAreaClickEvent, // 可操作类型
+  domSelector: string, // dom 选择 querySelector
+  shape?: HotzoneAreaShape,
+  callback?: (data: any) => void
 }
 
 class Hotzones {
   static uuid: number = 0 // 唯一id
   private dom: HTMLElement
   private data: Hotzone[]
-  private options: Options
-  constructor( data: Hotzone[], options: Options ){
+  private options: HotzoneOptions
+  constructor( data: Hotzone[], options: HotzoneOptions ){
     this.dom = document.querySelector(options.domSelector) as HTMLElement
     this.data = data
     this.options = options
@@ -54,20 +53,7 @@ class Hotzones {
     this.reloadCoords()
     this.initEvent()
   }
-  private appendHTML(ele: HTMLElement, html: string, site?: "before" | "after"): void{
-    let div: HTMLElement = document.createElement("div"),
-        nodes: NodeListOf<ChildNode>,
-        fragment: DocumentFragment = document.createDocumentFragment();
-    div.innerHTML = html;
-    nodes = div.childNodes;
-    for(let i = 0,len = nodes.length; i < len; i++){
-      fragment.appendChild(nodes[i].cloneNode(true));
-    }
-    !site || site !== "before" ? ele.appendChild(fragment) : ele.insertBefore(fragment, ele.firstChild);
-    // 回收内存
-    nodes = (null as unknown) as NodeListOf<ChildNode>;
-    fragment = (null as unknown) as DocumentFragment;
-  }
+  private appendHTML = ElementsUtils.appendHTML
   private initDom(){
     // 插入dom
     this.getElement().forEach((item) =>{
@@ -82,7 +68,7 @@ class Hotzones {
       let areasHtml: string = ''
       item.area.forEach(function(_item, j){
         const shape = _item.shape || options
-        areasHtml += `<area shape="${shape}" coords="${(_item.coords.join(','))}" data-index="${i},${j}" href="${_item.hrefOptions?.url || 'javascript:void(0)'}" target="${_item.hrefOptions?.target || ''}">`
+        areasHtml += `<area shape="${shape}" coords="${(_item.coords.join(','))}" data-index="${i},${j}" href="${_item.hrefHotzoneOptions?.url || 'javascript:void(0)'}" target="${_item.hrefHotzoneOptions?.target || ''}">`
       })
       return `
         <div data-index="${i}" class="hotzone-item">
@@ -100,7 +86,7 @@ class Hotzones {
       element.onclick = function(e){
         const areaData: HotzoneArea | undefined = that.getAreaData(e.target as HTMLElement)
         if(!areaData) return
-        const type: ClickEvent = areaData.type || that.options.type || 'href'
+        const type: HotzoneAreaClickEvent = areaData.type || that.options.type || 'href'
         if(type == 'copy'){
           that.copy(areaData.copyVal, that.options.callback)
         } else if(type == 'click'){
@@ -139,7 +125,7 @@ class Hotzones {
       that.setCoords(hotzone_element, hotzone_element.offsetWidth / that.data[index].img.width)
     })
   }
-  private debounce(fn: CallBack, wait: number) {
+  private debounce(fn: ()=>void, wait: number) {
     let timer: number | null = null;    
     return () => {
       let context = this
@@ -153,7 +139,7 @@ class Hotzones {
       }, wait)
     }
   }
-  private copy(val: string | undefined, callback: CallBackSuccess | undefined) {
+  private copy(val: string | undefined, callback: ((data: any) => void) | undefined) {
     if(!val) return
     if (document.execCommand('copy')) {
       let input = document.createElement('input') as HTMLInputElement;

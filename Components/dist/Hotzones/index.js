@@ -1,6 +1,11 @@
 "use strict";
+/**
+ * 功能：根据参数 渲染多个可以自定义（map）点击的图片。
+ * 支持页面缩放；支持自定义事件、复制功能、链接跳转功能
+**/
 class Hotzones {
     constructor(data, options) {
+        this.appendHTML = ElementsUtils.appendHTML;
         this.dom = document.querySelector(options.domSelector);
         this.data = data;
         this.options = options;
@@ -10,18 +15,6 @@ class Hotzones {
         this.initDom();
         this.reloadCoords();
         this.initEvent();
-    }
-    appendHTML(ele, html, site) {
-        let div = document.createElement("div"), nodes, fragment = document.createDocumentFragment();
-        div.innerHTML = html;
-        nodes = div.childNodes;
-        for (let i = 0, len = nodes.length; i < len; i++) {
-            fragment.appendChild(nodes[i].cloneNode(true));
-        }
-        !site || site !== "before" ? ele.appendChild(fragment) : ele.insertBefore(fragment, ele.firstChild);
-        // 回收内存
-        nodes = null;
-        fragment = null;
     }
     initDom() {
         // 插入dom
@@ -38,7 +31,7 @@ class Hotzones {
             item.area.forEach(function (_item, j) {
                 var _a, _b;
                 const shape = _item.shape || options;
-                areasHtml += `<area shape="${shape}" coords="${(_item.coords.join(','))}" data-index="${i},${j}" href="${((_a = _item.hrefOptions) === null || _a === void 0 ? void 0 : _a.url) || 'javascript:void(0)'}" target="${((_b = _item.hrefOptions) === null || _b === void 0 ? void 0 : _b.target) || ''}">`;
+                areasHtml += `<area shape="${shape}" coords="${(_item.coords.join(','))}" data-index="${i},${j}" href="${((_a = _item.hrefHotzoneOptions) === null || _a === void 0 ? void 0 : _a.url) || 'javascript:void(0)'}" target="${((_b = _item.hrefHotzoneOptions) === null || _b === void 0 ? void 0 : _b.target) || ''}">`;
             });
             return `
         <div data-index="${i}" class="hotzone-item">
