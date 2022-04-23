@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 默认绑定
+    function a(){
+      console.log(this);
+    }
+    // a()
+    // 隐式绑定
+    function _b(){
+      console.log(this, 'b');
+    }
+    var obj = {
+      a: '123',
+      b: function(){
+        console.log(this, 'obj.b');
+        _b()
+      },
+      c: null,
+      d: _b
+    }
+    obj.c = _b
+    // console.log(obj.b());
+    // console.log(obj.c());
+    // console.log(obj.d());
+    // 显示绑定
+    var _obj = {
+      val: 'aaa',
+      a: function(){
+        var str = [...arguments].reduce((sum, e)=>{
+          return sum  + ' - ' + e
+        })
+
+        return this.val + '~' + str;
+      }
+    }
+    var data = {
+      val: 'bbb'
+    }
+    var __a = _obj.a('111')
+    var __b = _obj.a.call(data, '2', '3', '4')
+    var __c = _obj.a.apply(data, ['2', '3', '4'])
+    var __d = _obj.a.bind(data, '2', '3', '4')
+    console.log(__a, __b, __c, __d, __d());
+
+
+    // new 绑定
+    function d(val){
+      this.val = val
+      console.log(this);
+    }
+    // var d1 = new d()
+
+    function f(){
+      this.val = 'f'
+    }
+    f.prototype.log = function(){
+      console.log(this.val, 'f.log');
+    }
+    function e(e){
+      this.val = 'e'
+      return new f()
+    }
+    e.prototype.log = function(){
+      console.log(this.val, 'log');
+    }
+    var e1 = new e()
+    // console.log(e1.log());
+
+    // 箭头函数绑定
+    var g = {
+      a: '1',
+      b: function(){
+        console.log(this.a, 'b');
+      },
+      c(){
+        console.log(this.a, 'c');
+      },
+      d: ()=>{
+        console.log(this, this.a, 'd');
+      }
+    }
+    // g.b()
+    // g.c()
+    // g.d()
+  </script>
+</body>
+</html>
