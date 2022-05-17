@@ -1,0 +1,14 @@
+@font-face {
+  font-family: Noto;
+  src: url('./assets/NotoSans-Regular.ttf') format('trueType');
+}
+
+body{
+  background-color: #eee;
+}
+.bg{
+  background-image: url(./assets/4.svg);
+}
+.noto{
+  font-family: Noto;
+}
