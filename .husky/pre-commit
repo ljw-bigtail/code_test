@@ -1,0 +1,7 @@
+# husky 插件会自动触发git的hock
+# 使用对应的hock 需要手动创建正确的hock文件，然后输入需要执行的 shell命令 
+
+# 这个例子里
+# 在 git commit 前，会掉调用hock中的 eslint 命令
+
+# npx eslint ./webpack-source-test
