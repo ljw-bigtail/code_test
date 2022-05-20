@@ -2,10 +2,6 @@ import './style.css';
 
 import './input';
 
-const math = require('./math');
-
-console.log(math.add(1, 2), 'math.add');
-
 class A {
   constructor() {
     this.str = 'app start';
