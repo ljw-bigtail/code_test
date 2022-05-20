@@ -82,5 +82,6 @@ module.exports = {
       template: './index.html',
     }),
     new EslintWebpackPlugin(), // eslint 如果eslint不通过，webpack中抛出异常 否则小问题时webpack直接通过编译了
+    // 拓展： husky 插件 可以在git hock中添加shell脚本，可以时间在git过成中先脚本后commit 等具体行为，可以缩减eslint次数，仅提交前检查
   ],
 };
