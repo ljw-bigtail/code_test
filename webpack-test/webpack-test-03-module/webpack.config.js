@@ -70,5 +70,12 @@ module.exports = {
         exclude: /node_modules/
       },
     ]
+  },
+
+  // tree-shaking配置：用于消除无用代码（测试环境需要手动开启 mode production时自动）
+  // 它依赖于ES2015中的 import 和 export 语句，用来检测代码模块是否被导出、导入，且被 JavaScript 文件使用。（MDN）
+  // 对 require 是无法支持的
+  optimization: {
+    usedExports: true, // 自动删除所有没用到的代码
   }
 }
