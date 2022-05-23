@@ -44,3 +44,6 @@ worker.onmessage = (message) => {
   console.log(message, 'worker message');
   console.log(message.data, 'worker res data')
 }
+
+
+import './test'

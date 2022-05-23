@@ -20,7 +20,14 @@ module.exports = {
       '@': path.resolve(__dirname, './src')
     },
 
-    extensions: ['.json', '.js', '.vue'], // 文件引用不使用后缀时，顺序读取对应后缀的文件（默认读取 .js 文件）
+    // extensions: ['.json', '.js', '.vue'], // 文件引用不使用后缀时，顺序读取对应后缀的文件（默认读取 .js 文件）
+    extensions: ['.ts', '.json', '.js', '.vue'], // 优先解析ts
+  },
+
+  output: {
+    filename: 'scripts/[name].[contenthash].js', // 编译输出文件 添加hash串 相当于版本号了
+    path: path.resolve(__dirname, './dist'),
+    clean: true
   },
 
   plugins: [
@@ -56,7 +63,12 @@ module.exports = {
           }, 
           'postcss-loader',
         ]
-      }
+      },
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
     ]
   }
 }
