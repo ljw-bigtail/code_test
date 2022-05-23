@@ -28,7 +28,7 @@ module.exports = {
       template: './index.html'
     }),
 
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin() // 可以实时预览的依赖关系工具
   ],
 
   externalsType: 'script',
@@ -40,5 +40,23 @@ module.exports = {
       'https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js', // 外部引入的js路径（自动添加到模版中）
       '$', // 表示上面的js在浏览器中暴露的对象, 与引入时赋值的 $$ 无关
     ], 
+  },
+
+  module:{
+    rules: [
+      {
+        test: /\.css/,
+        use: [
+          'style-loader', 
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true // css 模块 功能开启 
+            }
+          }, 
+          'postcss-loader',
+        ]
+      }
+    ]
   }
 }

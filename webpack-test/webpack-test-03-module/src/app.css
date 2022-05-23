@@ -1,0 +1,10 @@
+body{
+  font-size: 18px;
+  background-color: aquamarine;
+  display: flex;
+
+  /* postcss-nested */
+  .box{
+    background-color: red;
+  }
+}
