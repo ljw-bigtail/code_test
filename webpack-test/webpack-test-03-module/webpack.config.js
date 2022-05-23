@@ -8,7 +8,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
+  // mode: 'development',
   mode: 'development',
+
   // entry: './src/app.js',
   entry: {
     app: './src/app.js',
@@ -75,7 +77,13 @@ module.exports = {
   // tree-shaking配置：用于消除无用代码（测试环境需要手动开启 mode production时自动）
   // 它依赖于ES2015中的 import 和 export 语句，用来检测代码模块是否被导出、导入，且被 JavaScript 文件使用。（MDN）
   // 对 require 是无法支持的
+  // 另外 webpack5 默认所有代码是无副作用（可以tree-shaking）需要手动配置 sideEffect(package.json) 不做操作的文件(例如 theme.css 类似文件)
   optimization: {
     usedExports: true, // 自动删除所有没用到的代码
   }
+
+  // sideEffect: true | false | []
+  // 所有代码有副作用（默认）｜ 都无副作用随便删 ｜ 这些包有副作用
+  // 例子： "sideEffect": ["*.css"],  表示 所有的css都是有副作用的 不能删
+
 }
