@@ -1,5 +1,5 @@
 // 几种导入模块的方法
-import _ from 'lodash'
+// import _ from 'lodash'
 import Header from './components/Header'
 
 const math = require('/src/math.js')

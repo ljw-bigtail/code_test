@@ -1,6 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const webpack = require('webpack')
+
 /*
   webpack 依赖关系工具推荐
   webpack-bundle-analyzer
@@ -14,7 +16,9 @@ module.exports = {
   // entry: './src/app.js',
   entry: {
     app: './src/app.js',
-    app2: './src/app2.js'
+    app2: './src/app2.js',
+    app3: './src/app3.js',
+    app4: './src/app4.js',
   },
 
   resolve: {
@@ -37,7 +41,13 @@ module.exports = {
       template: './index.html'
     }),
 
-    // new BundleAnalyzerPlugin() // 可以实时预览的依赖关系工具
+    // new BundleAnalyzerPlugin(), // 可以实时预览的依赖关系工具
+
+    // shimming预置全局变量
+    // 也是另一种引入包的方法
+    new webpack.ProvidePlugin({
+      _: 'lodash' // 只要代码中有 _ ，就在引入lodash到全局变量中 , 这样会打包进所有使用_变量的js中
+    })
   ],
 
   externalsType: 'script',
@@ -70,6 +80,24 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: require.resolve('./src/app3.js'),
+        // 两种写法都可
+        use: 'imports-loader?wrapper=window',
+        // use: [
+        //   {
+        //     loader: 'imports-loader',
+        //     options: {
+        //       wrapper: 'window'
+        //     }
+        //   }
+        // ],
+      },
+      {
+        test: require.resolve('./src/utils.js'),
+        // 帮助没有export到代码导出
+        use: 'exports-loader?type=commonjs&exports=PublicServer,multiple|Constant.size|Constant,multiple|Utils',
       },
     ]
   },
