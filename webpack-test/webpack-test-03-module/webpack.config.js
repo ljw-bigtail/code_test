@@ -19,6 +19,7 @@ module.exports = {
     app2: './src/app2.js',
     app3: './src/app3.js',
     app4: './src/app4.js',
+    app5: './src/app5.js',
   },
 
   resolve: {
@@ -98,6 +99,28 @@ module.exports = {
         test: require.resolve('./src/utils.js'),
         // 帮助没有export到代码导出
         use: 'exports-loader?type=commonjs&exports=PublicServer,multiple|Constant.size|Constant,multiple|Utils',
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets: [
+                    'last 1 version', // 支持到浏览器的最后一个版本
+                    '> 1%', // 支持使用率大于1%的浏览器
+                  ],
+                  useBuiltIns: 'usage',
+                  corejs: 3 // 根据 安装的 corejs版本号写
+                }
+              ]
+            ]
+          }
+        },
+        exclude: /node_modules/
       },
     ]
   },
