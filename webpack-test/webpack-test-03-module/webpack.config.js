@@ -80,10 +80,18 @@ module.exports = {
   // 另外 webpack5 默认所有代码是无副作用（可以tree-shaking）需要手动配置 sideEffect(package.json) 不做操作的文件(例如 theme.css 类似文件)
   optimization: {
     usedExports: true, // 自动删除所有没用到的代码
-  }
+  },
 
   // sideEffect: true | false | []
   // 所有代码有副作用（默认）｜ 都无副作用随便删 ｜ 这些包有副作用
   // 例子： "sideEffect": ["*.css"],  表示 所有的css都是有副作用的 不能删
 
+
+
+  devServer:{
+    // 启动服务时中间件
+    devMiddleware: {
+      writeToDisk: true // 启动服务时实时修改dist （不仅放到内存里 还会存到dist里）
+    }
+  }
 }
