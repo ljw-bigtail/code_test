@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIF Maker</title>
+
+  <link href="./lib/web-uploader-1.8/css/uploader.all.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="./lib/web-uploader-1.8/js/Q.js"></script>
+  <script type="text/javascript" src="./lib/web-uploader-1.8/js/Q.Uploader.js"></script>
+  <script type="text/javascript" src="./lib/web-uploader-1.8/js/Q.Uploader.UI.File.js"></script>
+
+  <link rel="stylesheet" href="./lib/gif.js/main.css">
+  <script src="./lib/gif.js/gif.js"></script>
+  <script src="./lib/gif.js/gif.worker.js"></script>
+
+  <script src="./lib/FileSaver.js/FileSaver.min.js"></script>
+
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <div id="header" class="header">Header</div>
+  <div class="main">
+    <div class="content">
+      <div class="contentin">
+        <div>
+          <a id="upload-target" class="x-button">选择文件并上传</a>
+        </div>
+        <div id="drop-area">将文件拖拽到此区域</div>
+        <div id="upload-view"></div>
+        <div id="log"></div>
+      </div>
+    </div>
+    <div id="sidebar" class="sidebar"></div>
+    <div id="size-form">
+      <div>
+        <label for="width">宽：</label>
+        <input type="number" name="width" placeholder="">
+      </div>
+      <div>
+        <label for="height">高：</label>
+        <input type="number" name="height" placeholder="">
+      </div>
+      <div>
+        <label for="repeat">重复：</label>
+        <input type="number" name="repeat" placeholder="-1 never 0 ever or number">
+      </div>
+      <div>
+        <label for="delay">停留时间：</label>
+        <input type="number" name="delay" placeholder="停留时间" value="500ms">
+      </div>
+      
+    </div>
+    <button id="make-gif" class="x-button">生成GIF</button>
+  </div>
+
+
+  <script type="text/javascript">
+    function log(msg) {
+      document.getElementById("log").innerHTML += (msg != undefined ? msg : "") + "<br />";
+    }
+
+    var E = Q.event,
+      Uploader = Q.Uploader;
+
+    var app = {
+      data: {
+        uploader: null,
+        gif: null
+      },
+      fileLoader: {
+        init() {
+          app.data.uploader = new Uploader({
+            url: false,
+            target: document.getElementById("upload-target"),
+            view: document.getElementById("upload-view"),
+
+            allows: ".jpg,.png,.jpeg", //允许上传的文件格式
+            maxSize: 2 * 1024 * 1024, //允许上传的最大文件大小,字节,为0表示不限(仅对支持的浏览器生效)
+
+            //每次上传都会发送的参数(POST方式)
+            data: {
+              user: "Devin"
+            },
+
+            /*
+                上传回调事件：
+                init,          //上传管理器初始化完毕后触发
+                select,        //点击上传按钮准备选择上传文件之前触发,返回false可禁止选择文件
+                add[Async],    //添加任务之前触发,返回false将跳过该任务
+                upload[Async], //上传任务之前触发,返回false将跳过该任务
+                send[Async],   //发送数据之前触发,返回false将跳过该任务
+                cancel,        //取消上传任务后触发
+                remove,        //移除上传任务后触发
+                progress,      //上传进度发生变化后触发(仅html5模式有效)
+                complete       //上传完成后触发
+            */
+            on: {
+              //添加之前触发
+              add: function (task) {
+                //task.limited存在值的任务不会上传，此处无需返回false
+                switch (task.limited) {
+                  case 'ext':
+                    return alert("允许上传的文件格式为：" + this.ops.allows);
+                  case 'size':
+                    return alert("允许上传的最大文件大小为：" + Q.formatSize(this.ops.maxSize));
+                }
+
+                //自定义判断，返回false时该文件不会添加到上传队列
+                //return false;
+
+                log(task.name + ": 已添加!");
+              },
+
+              //任务移除后触发
+              remove: function (task) {
+                log(task.name + ": 已移除!");
+              },
+
+              //上传完成后触发
+              complete: function (task) {}
+            }
+          });
+        },
+        drop() {
+          const uploader = app.data.uploader
+          var boxDropArea = document.getElementById("drop-area");
+
+          //若浏览器不支持html5上传，则禁止拖拽上传
+          if (!Uploader.support.html5) {
+            boxDropArea.innerHTML = "您的浏览器不支持拖拽文件上传！";
+            return;
+          }
+
+          //配置中关闭了html5上传
+          if (!uploader.html5) {
+            boxDropArea.innerHTML = "您在配置中关闭了拖拽文件上传！";
+            return;
+          }
+
+          //阻止浏览器默认拖放行为
+          E.add(boxDropArea, "dragleave", E.stop);
+          E.add(boxDropArea, "dragenter", E.stop);
+          E.add(boxDropArea, "dragover", E.stop);
+
+          E.add(boxDropArea, "drop", function (e) {
+            E.stop(e);
+
+            //获取文件对象
+            var files = e.dataTransfer.files;
+            uploader.addList(files);
+          });
+        },
+      },
+      loadImg(file) {
+        const that = this
+        return new Promise((res, rej) => {
+          const opt = that.getOpt()
+          let canvas = document.createElement("canvas")
+          canvas.width = opt.width
+          canvas.height = opt.height
+          var img = new Image()
+          img.src = window.URL.createObjectURL(file)
+          img.onload = function (e) {
+            const _img = this
+            res({
+              canvas,
+              img: _img
+            })
+          }
+        })
+      },
+      getOpt(){
+        var width = document.querySelector('#size-form input[name="width"]').value
+        var height = document.querySelector('#size-form input[name="height"]').value
+        var repeat = document.querySelector('#size-form input[name="repeat"]').value
+        var delay = document.querySelector('#size-form input[name="repeat"]').delay
+        return {
+          width,
+          height,
+          repeat,
+          delay
+        }
+      },
+      makeGif(data) {
+        const opt = this.getOpt()
+        this.data.gif = new GIF(Object.assign({
+          workers: 2,
+          quality: 10,
+          repeat: 0, // -1 never 0 ever or number 
+          background: '#fff',
+          // debug: true,
+          dither: false, // 抖动方法 // FloydSteinberg FalseFloydSteinberg Stucki Atkinson
+          workerScript: './lib/gif.js/gif.worker.js'
+        }, opt));
+
+        var that = this
+
+        Promise.all(data.map(item => {
+          return that.loadImg(item.file)
+        })).then(res => {
+          res.forEach(item => {
+            const {
+              img,
+              canvas
+            } = item
+            let ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+            that.data.gif.addFrame(canvas, {
+              delay: opt.delay, // 延迟时间
+              copy: true
+            })
+          })
+        }).then(() => {
+          that.data.gif.render();
+        }).catch(e => {
+          console.error(e);
+        })
+
+        this.data.gif.on('finished', function (blob) {
+          // 生成预览
+          window.open(URL.createObjectURL(blob));
+          // 生成下载
+          saveAs(blob, 'image/gif');
+        });
+      },
+      event() {
+        const that = this
+        document.querySelector('#make-gif').addEventListener('click', () => {
+          that.makeGif(that.data.uploader.list)
+        })
+      },
+      init() {
+        this.fileLoader.init()
+        this.event()
+      },
+    }
+
+    app.init()
+  </script>
+</body>
+
+</html>
