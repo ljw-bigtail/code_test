@@ -13,29 +13,280 @@
   <script type="text/javascript" src="./lib/web-uploader-1.8/js/Q.Uploader.js"></script>
   <script type="text/javascript" src="./lib/web-uploader-1.8/js/Q.Uploader.UI.File.js"></script>
 
-  <link rel="stylesheet" href="./lib/gif.js/main.css">
+  <!-- <link rel="stylesheet" href="./lib/gif.js/main.css"> -->
   <script src="./lib/gif.js/gif.js"></script>
   <script src="./lib/gif.js/gif.worker.js"></script>
 
   <script src="./lib/FileSaver.js/FileSaver.min.js"></script>
 
   <style>
-    
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+
+    body {
+      line-height: 1;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    blockquote,
+    q {
+      quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    :root {
+      --main-color: #6ca53d;
+      --font-color: #222;
+      --radius: 8px;
+      --radius-mini: 4px;
+      --border: 1px solid #ccc;
+      --width: 600px;
+      --shadow: 0 0 20px 2px #e9e9e9;
+    }
+
+    body {
+      color: var(--font-color);
+      text-align: center;
+    }
+
+    * {
+      border-radius: var(--radius-mini);
+    }
+
+    input {
+      border: var(--border);
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .contentin {
+      border: 1px dashed #ccc;
+      border-radius: var(--radius);
+      margin: 40px auto;
+      width: var(--width);
+    }
+
+    .button {
+      padding: 12px 32px;
+      display: block;
+      margin: 20px;
+      background-color: var(--main-color);
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+
+    #drop-area {
+      margin-top: -20px;
+      padding: 60px;
+    }
+
+    #size-form {
+      width: var(--width);
+      margin: 0 auto;
+      box-shadow: var(--shadow);
+      padding: 20px 0;
+    }
+
+    #size-form>div {
+      padding: 12px 20px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+
+    #size-form>div label {
+      width: 18%;
+      display: inline-block;
+    }
+
+    #size-form>div input {
+      padding: 6px 12px;
+      line-height: 18px;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    #make-gif {
+      width: calc(var(--width) * 0.8);
+      margin-top: 40px;
+      font-size: 20px;
+    }
+
+    #upload-view {
+      width: var(--width);
+      margin: -20px auto 20px;
+    }
+
+    .ui-file .u-item {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .ui-file .u-over .u-op .u-op-cancel,
+    .ui-file .u-size,
+    .ui-file .u-speed,
+    .ui-file .u-detail,
+    .ui-file .u-progress-bar {
+      display: none;
+    }
+
+    #log {
+      border: 1px dashed #ccc;
+      width: var(--width);
+      text-align: left;
+      margin: 40px auto 200px;
+      padding-bottom: 40px;
+      font-size: 0.8em;
+    }
+
+    #log h3{
+      font-weight: normal;
+      padding: 20px;
+    }
+
+    #log p{
+      padding: 0 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
   </style>
 </head>
 
 <body>
-  <div id="header" class="header">Header</div>
+  <!-- <div id="header" class="header">Header</div> -->
   <div class="main">
     <div class="content">
       <div class="contentin">
-        <div>
-          <a id="upload-target" class="x-button">选择文件并上传</a>
-        </div>
-        <div id="drop-area">将文件拖拽到此区域</div>
-        <div id="upload-view"></div>
-        <div id="log"></div>
+        <div id="upload-target" class="button">选择文件并上传</div>
+        <div id="drop-area">或将文件拖拽到此区域</div>
       </div>
+      <div id="upload-view"></div>
     </div>
     <div id="sidebar" class="sidebar"></div>
     <div id="size-form">
@@ -49,21 +300,26 @@
       </div>
       <div>
         <label for="repeat">重复：</label>
-        <input type="number" name="repeat" placeholder="-1 never 0 ever or number">
+        <input type="number" name="repeat" min="-1" placeholder="-1 never 0 ever or number">
       </div>
       <div>
         <label for="delay">停留时间：</label>
-        <input type="number" name="delay" placeholder="停留时间" value="500ms">
+        <input type="number" name="delay" min="0" placeholder="停留时间 毫秒" value="500ms">
       </div>
-      
+
     </div>
-    <button id="make-gif" class="x-button">生成GIF</button>
+    <button id="make-gif" class="button">生成GIF</button>
+
+    <div id="log">
+      <h3>日志：</h3>
+    </div>
   </div>
 
-
-  <script type="text/javascript">
-    function log(msg) {
-      document.getElementById("log").innerHTML += (msg != undefined ? msg : "") + "<br />";
+  <script>
+    function log(msg = '') {
+      document.getElementById("log").innerHTML += `
+        <p>${msg}</p>
+      `;
     }
 
     var E = Q.event,
@@ -82,12 +338,7 @@
             view: document.getElementById("upload-view"),
 
             allows: ".jpg,.png,.jpeg", //允许上传的文件格式
-            maxSize: 2 * 1024 * 1024, //允许上传的最大文件大小,字节,为0表示不限(仅对支持的浏览器生效)
-
-            //每次上传都会发送的参数(POST方式)
-            data: {
-              user: "Devin"
-            },
+            maxSize: 20 * 1024 * 1024, //允许上传的最大文件大小,字节,为0表示不限(仅对支持的浏览器生效)
 
             /*
                 上传回调事件：
@@ -107,9 +358,9 @@
                 //task.limited存在值的任务不会上传，此处无需返回false
                 switch (task.limited) {
                   case 'ext':
-                    return alert("允许上传的文件格式为：" + this.ops.allows);
+                    return log("允许上传的文件格式为：" + this.ops.allows);
                   case 'size':
-                    return alert("允许上传的最大文件大小为：" + Q.formatSize(this.ops.maxSize));
+                    return log("允许上传的最大文件大小为：" + Q.formatSize(this.ops.maxSize));
                 }
 
                 //自定义判断，返回false时该文件不会添加到上传队列
@@ -127,6 +378,7 @@
               complete: function (task) {}
             }
           });
+          this.drop()
         },
         drop() {
           const uploader = app.data.uploader
@@ -176,7 +428,7 @@
           }
         })
       },
-      getOpt(){
+      getOpt() {
         var width = document.querySelector('#size-form input[name="width"]').value
         var height = document.querySelector('#size-form input[name="height"]').value
         var repeat = document.querySelector('#size-form input[name="repeat"]').value
@@ -242,7 +494,11 @@
       },
     }
 
-    app.init()
+    try{
+      app.init()
+    }catch(e){
+      log(e.toString())
+    }
   </script>
 </body>
 
