@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>统计</title>
+  <!-- <title>君合天玺施工人数统计</title> -->
+  <script src="./chart.min.js"></script>
+</head>
+<body>
+  <canvas id="myChart"></canvas>
+  <script type="module">
+    import { sourceData } from './source.js'
+    const data = sourceData.filter(item => {
+      return item && item.trim() !== ''
+    }).map(item => {
+      return item
+        .replace(/\#/g, '号')
+        .replace(/：/g, ':')
+        .replace(/:\n/g, ':')
+        .replace(/号楼:  /g, '号楼:')
+        .replace(/施工情况:  /g, '施工情况:')
+        .replace(/日施工情况:/g, '日施工情况:\n')
+        .replace(/一/g, '1')
+        .replace(/二/g, '2')
+        .replace(/三/g, '3')
+        .replace(/四/g, '4')
+        .replace(/五/g, '5')
+        .replace(/六/g, '6')
+        .replace(/七/g, '7')
+        .replace(/八/g, '8')
+        .replace(/九/g, '9')
+        .replace(/(共|合)(计)*(:|：)*(\d)*人/g, '')
+    }).map(item => {
+      let obj = {}
+      const date = item.match(/(\d)*月(\d)*日/)
+      const _list = item
+        .split(/\n/)
+        .filter(item => item.trim() != '')
+        .map(item => item.trim())
+        .filter(item => (item.length - 6) !== item.lastIndexOf("日施工情况:"))
+        .filter(item => (item.length - 5) !== item.lastIndexOf("日施工情况"))
+        .map(e=>{
+          let key = e.match(/(\d){1}号楼/)
+          key = key ? key[0] : null
+          if(!key) {
+            obj['其他'] = (obj['其他'] ? (obj['其他'] + '\n') : '') + e
+          }else{
+            if(obj[key]){
+              obj[key] = obj[key] + '\n' + e
+            }else{
+              obj[key] = e
+            }
+          }
+        })
+      const list = []
+      Object.keys(obj).map(e=>{
+        const value = obj[e]
+        const _arr = value.match(/[0-9]+人/g)
+        const num = _arr ? _arr.map(e=>parseInt(e)).reduce((a,b)=>a+b) : 0
+        // if(num == 0) console.log(value)
+        list.push({
+          key: e,
+          value,
+          num
+        })
+      })
+      return {
+        date: date ? date[0] : '日期未匹配',
+        list,
+        sum: list.map(e=>e.num).reduce((a,b)=>a+b)
+      }
+    })
+    // console.log(sourceData);
+    console.log(data);
+    
+    const data_labels = ["1号楼","2号楼","3号楼","5号楼","6号楼","9号楼","其他"]
+
+    window.chartColors = {
+      "red": "rgba(255, 99, 132, .6)",
+      "orange": "rgba(255, 159, 64, .6)",
+      "yellow": "rgba(255, 205, 86, .6)",
+      "green": "rgba(75, 192, 192, .6)",
+      "blue": "rgba(54, 162, 235, .6)",
+      "purple": "rgba(153, 102, 255, .6)",
+      "grey": "rgba(201, 203, 20, .67)"
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var stackedLine = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: data.map(e=>e.date),
+        datasets: data_labels.map((e, i)=>{
+          return {
+            label: e,
+            borderColor: window.chartColors[Object.keys(window.chartColors)[i]],
+            backgroundColor: window.chartColors[Object.keys(window.chartColors)[i]],
+            fill: true,
+            data: (function(data){
+              return data.map(_data => {
+                const arr = _data.list.filter(_e => _e.key == e)
+                return arr.length > 0 ? arr[0].num : 0
+              })
+            })(data),
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4
+          }
+        })
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 0 // 一般动画时间
+        },
+        plugins: {
+          title: {
+            display: true,
+  					text: '君合天玺施工人数统计-2022'
+          },
+          tooltip: {
+            callbacks: {
+              afterFooter: (tooltipItems) => {
+                let d = data[tooltipItems[0].dataIndex].list
+                let html = '\n'
+                d.forEach(e=>{
+                  html += `${e.value} 【共${e.num}人】；\n`
+                })
+                return html
+              },
+              footer: (tooltipItems) => {
+                let sum = 0;
+                tooltipItems.forEach(function(tooltipItem) {
+                  sum += tooltipItem.parsed.y;
+                });
+                return '合计: ' + sum;
+              },
+            }
+          },
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+				scales: {
+					yAxis: {
+						stacked: true,
+					}
+				}
+      }
+    });
+  </script>
+</body>
+</html>
