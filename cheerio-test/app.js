@@ -18,6 +18,13 @@ const config = {
 };
 config.dir = "end/" + config.bookName; // 保存的文件夹名称
 
+const global = {
+  taskNum: 0,
+  log: (val) => {
+    console.log(`${++global.taskNum}. ${val}`);
+  }
+}
+
 // 文件夹不存在就创建
 async function exitsDir(reaPath) {
   const absPath = path.resolve(__dirname, reaPath);
@@ -149,7 +156,6 @@ const imgToPDF = async function (imgs, outFilename) {
     // 图片尺寸 (800 * 1270)
     imgs.map((img) => {
       const _imgSrc = reSetExt(`./${config.dir}/${img.file}`, 'jpg')
-      // console.log(_imgSrc);
       doc
         .addPage({
           margin: 0,
@@ -162,7 +168,8 @@ const imgToPDF = async function (imgs, outFilename) {
     });
     doc.end();
   }catch(err){
-    console.log('PDF 存储异常：', outFilename);
+    console.error('PDF 存储异常：', outFilename);
+    console.log(err);
     fs.rmSync(pdfName)
   }
 };
@@ -200,9 +207,10 @@ const reSetExt = function(name, ext){
 
 // 根据任务列表递归查询图片地址列表 并 保存图片
 const task = async (browser, list, index, cb) => {
-  if (list.length == index) {
+  let cache = await fileCache.get();
+  if (list.length - cache.endSection + 1 == index) {
     // 任务结束关闭浏览器
-    console.log("2. 图片缓存完毕。");
+    global.log("图片缓存完毕");
     fileCache.set("done", 1); // 缓存完
     await browser.close();
     cb && cb();
@@ -240,13 +248,14 @@ let browser = null;
 // 任务
 const run_img = async (browser, cache) => {  
   await task(browser, cache.list, 0, function () {
-    console.log("任务结束。");
+    global.log("任务结束");
   });
 };
 
 async function run_pdf(list){
   // 多图转pdf
-  for (let index = 0; index < list.length; index++) {
+  let cache = await fileCache.get();
+  for (let index = 0; index < (list.length - cache.endSection); index++) {
     const pdfName = `${reverseIndex(list.length, index)}_${list[index].name}.pdf`;
     let needsPDF = false;
     try {
@@ -259,12 +268,12 @@ async function run_pdf(list){
       await imgToPDF(list[index].imgs, pdfName);
     }
   }
+  fileCache.set("endSection", list.length); // 缓存章节数
 }
-
 
 process.on("uncaughtException", async function (err) {
   await fileCache.set("done", 0); // 任务缓存未完
-  console.log("缓存异常：", err);
+  console.error("缓存异常：", err);
   browser && (await browser.close());
   process.exit(0);
 });
@@ -286,22 +295,22 @@ process.on("uncaughtException", async function (err) {
     stopInfo = "";
   }
   if (stopInfo !== "") {
-    console.log("任务暂停：" + stopInfo);
+    global.log("任务暂停：" + stopInfo);
     return;
   }
-  console.log("任务开始：");
+  global.log("任务开始");
+  browser = await puppeteer.launch({ headless: false });
   // 获取并保存列表缓存
-  let list = null;
-  if (!cache.list) {
-    list = await getListJSON(browser);
+  let list = await getListJSON(browser);
+  if (!cache.list || list.length != cache.endSection) {
     cache = await fileCache.set({
-      list: list,
+      list,
       updateTime: +new Date(),
     });
+    global.log(`增量更新至${list[0].name}章;共${cache.list.length - cache.endSection}章`);
   }
-  console.log("1. 列表获取完毕。");
+  global.log(`列表获取完毕`);
 
-  browser = await puppeteer.launch({ headless: false });
   await run_img(browser, cache)
 
   await run_pdf(cache.list)
