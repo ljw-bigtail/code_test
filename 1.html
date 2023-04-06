@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var data_nl = {
+  "COMMON": {
+    "HI": "Hoi",
+    "ITEM(S)": "ARTIKEL(S)",
+    "UNIT_PRICE": "EENHEID PRIJS",
+    "QUANTITY": "HOEVEELHEID",
+    "AMOUNT": "BEDRAG",
+    "ON_SALE": "Te koop",
+    "COLOR": "Kleur",
+    "SIZE": "Maat",
+    "FIRST_NAME": "Voornaam",
+    "LAST_NAMES": "Achternamen",
+    "ADDRESS_LINE1": "Adres regel 1",
+    "COUNTRY": "Land",
+    "CITY": "Stad",
+    "POSTAL_CODE": "Postcode",
+    "TRACKING_NUMBER": "Volg nummer",
+    "TRACKING_WEBSITE": "Tracking-website",
+    "DISPATCHED": "Binnen verzonden",
+    "DAYS": "dagen.",
+    "REGARDS": "Groeten",
+    "BEST_REGARDS": "Hartelijke groeten",
+    "DEAR": "Beste",
+    "DISCOUNT": "Korting",
+    "TOTAL": "Totaal",
+    "SUBTOTAL": "Subtotaal",
+    "SHIPPING": "Verzenden",
+    "YOURS_SINCERELY": "Hoogachtend,",
+    "THE_TEAM": "Het $!{SITE.capName} Team",
+    "SITE_NAME_TEAM": "$!{FullSiteName} Team"
+  },
+  "HEADER": {
+    "SECURED_PAYMENTS": "100% beveiligde <br> betalingen",
+    "CUSTOMER_SERVICE_MAIL_WHATS_APP": "Klantenservice <br> Mail&Whats-app",
+    "HIGHEST_QUALITY_GUARANTEE": "Hoogste kwaliteitsgarantie",
+    "CREATE_YOUR_OWN": "Maak je eigen",
+    "FACE_PRINT": "Gezicht afdrukken",
+    "UNIQUE_DESIGN_FASHION": "Unieke designmode",
+    "UNIQUE_DESIGN_ACCESSORIES": "Unieke designaccessoires",
+    "GIFT&OCCASIONS": "Cadeau & Gelegenheden",
+    "HOT_SALES": "Hete verkoop",
+    "NEW_ARRIVALS": "Nieuwkomers",
+    "MATCHING_OUTFITS": "Bijpassende outfits",
+    "BOYS": "Jongens",
+    "GIRLS": "Meisjes",
+    "HOT_SALE": "Hete verkoop",
+    "NEW_IN": "Nieuw in",
+    "BABY": "Baby",
+    "TODDLER": "Peuter",
+    "KIDS": "Kinderen"
+  },
+  "FOOTER": {
+    "THIS_EMAIL_WAS_SENT_FROM_A_NOTIFICATION_ONLY_ADDRESS_THAT_CANNOT_ACCEPT_INCOMING_EMAIL": "Deze e-mail is verzonden vanaf een alleen-meldingsadres dat geen inkomende e-mail kan accepteren.",
+    "PLEASE_DO_NOT_REPLY_TO_THIS_MESSAGE_IF_YOU_HAVE_ANY_QUESTIONS_OR_CONCERNS_PLEASE": "Gelieve deze boodschap niet te beantwoorden. Als u vragen of opmerkingen heeft, alstublieft",
+    "EMAIL_US": "email ons",
+    "IF_YOU_HAVE_ANY_QUESTIONS": "Als je vragen hebt, neem dan gerust contact op via: <a href='mailto:$!{SITE.contactEmail}' style='color: $SITE.color'>$!{SITE.contactEmail}</a> .",
+    "READ_OUR_PRIVACY_POLICY": "Lees ons privacybeleid"
+  },
+  "NEW_REGISTER": {
+    "WELCOME_TO": "Welkom bij $!{SITE.capDomain}",
+    "YOU_CAN_LOGIN_YOUR_ACCOUNT_TO_MANAGE_YOUR_ORDER_USING_THE_CREDENTIAL_BELOW": "U kunt inloggen op uw account om uw bestelling te beheren met behulp van de onderstaande inloggegevens:<br>Login: $!{user.email}<br>Wachtwoord: $!{user.password}<br><br>Als u uw wachtwoord, <a href=\"$!{recoverUrl}\">klik hier</a> om verder te gaan."
+  },
+  "NEW_REGISTER_SELF": {
+    "WELCOME_TO": "Welkom bij $!{SITE.capDomain}",
+    "BODY_CONTENT": "Bedankt dat je lid bent geworden van de familie van $!{SITE.name}. Gewoon <a href='$!{SITE.url}' target='_blank'>hier klikken</a> om uw reis te beginnen. Veel winkelplezier!<br><br>Als u vragen heeft, kunt u <a href='$!{SITE.contactUsUrl}' target='_blank'>contact met ons opnemen</a>."
+  },
+  "QUICK_REGISTER": {
+    "WELCOME_TO": "Welkom bij $!{SITE.capDomain}",
+    "THANK_YOU_FOR_CREATING_YOUR_ACCOUNT_WELCOME": "Bedankt voor het aanmaken van een account bij $!{SITE.capDomain}, en welkom！<br>Inloggen: $!{user.email}<br>Wachtwoord: $!{user.password}<br><br>Als u wilt <a href=\"$!{recoverUrl}\">klik hier</a> om door te gaan om uw wachtwoord opnieuw in te stellen.",
+    "REGISTER_TITLE": "$!{words.title}",
+    "REGISTER_CODE": "$!{words.coupon.label}",
+    "GET_STARTED": "BEGIN",
+    "CODE": "CODE"
+  },
+  "FIND_PASSWORD": {
+    "CUSTOMER_ACCOUNT": "Stel je wachtwoord opnieuw in",
+    "THANKS_FOR_SUBMITTING_A_TICKET": "Bedankt voor het insturen van een ticket",
+    "DEAR": "Beste",
+    "YOU_HAVE_REQUESTED_TO_HAVE_YOUR_PASSWORD_RESET_FOR_YOUR_ACCOUNT_AT": "U heeft verzocht om uw wachtwoord opnieuw in te stellen voor uw account bij $!{SITE.capName}",
+    "PLEASE_VISIT_THIS_URL_TO_RESET_YOUR_PASSWORD": "Klik op de onderstaande knop om uw wachtwoord opnieuw in te stellen.",
+    "IF_YOU_RECEIVED_THIS_EMAIL_IN_ERROR_YOU_CAN_SAFELY_IGNORE_THIS_EMAIL": "Als u deze e-mail ten onrechte heeft ontvangen, kunt u deze e-mail gerust negeren.",
+    "SINCERELY": "Eerlijk",
+    "RESET_PASSWORD": "RESET WACHTWOORD",
+    "THE_TEAM": "Het $!{SITE.capName} Team",
+    "HELLO": "Hallo"
+  },
+  "PAYSUCCESS": {
+    "YOU_HAVE_SUCCESSFULLY_PAID_FOR_ORDER": "ALERT--Orderbevestiging",
+    "THANK_YOU_FOR_YOUR_ORDER": "Bedankt om bij ons te winkelen. Uw bestelling $!{order.orderNo} wordt nu verwerkt en wordt normaal binnen 7 dagen verzonden.",
+    "SUPER_SAVINGS": "Superbesparingen: 7 - 15 werkdagen",
+    "STANDARD_SHIPPING": "Standaard verzending: 6 - 8 werkdagen",
+    "EXPRESS_SHIPPING": "Spoedverzending: 3 - 6 werkdagen",
+    "IF_YOU_PAID_WITH_A_PAYPAL_ACCOUNT_OR_CREDIT_CARD": "Als u met een PayPal-account of creditcard heeft betaald, <br/> verschijnt de naam van de verkoper \"<b>Orderplus Intl.</b>\" op uw kaartafschrift.",
+    "WE_HAVE_RECEIVED_YOUR_PAYMENT_FOR_ORDER": "We hebben uw betaling voor bestelling $!{order.orderNo} ontvangen. U vindt $!{SITE.topDomain} op uw creditcardafschrift als de betaling met een creditcard is gedaan.",
+    "DELAYED_SHIPPING_NOTICE": "Bericht over vertraagde verzending",
+    "DELIVERY_OF_YOUR_ORDER": "De levering van uw bestelling kan waarschijnlijk vertraging oplopen vanwege de Chinese nieuwjaarsvakantie (van 21/1/2020 tot 30/1/2020), aangezien uw bestelling wordt verzonden vanuit ons magazijn in China.",
+    "ORDERS_RECEIVED_BEFORE1": "Bestellingen ontvangen vóór 21/1/2020 moeten worden verzonden tussen 30/1/2020 en 10/2/2020",
+    "ORDERS_RECEIVED_BEFORE2": "Bestellingen ontvangen vóór 30/1/2019 moeten worden verzonden tussen 10/2/2020 en 20/2/2020",
+    "ORDERS_PLACED_WITH_US": "Bestellingen die bij ons worden geplaatst, worden verpakt en verzonden in de volgorde waarin ze zijn ontvangen, en hoewel er een korte vertraging kan optreden bij de verzending, kunt u erop vertrouwen dat uw bestelling veilig is en dat u zult ontvangen wat u hebt besteld.",
+    "WISH_YOU": "Wens je een gelukkig Chinees maannieuwjaar!",
+    "CUSTOMER_SERVICES": "Als je na 7 dagen nog geen bezorgbericht hebt ontvangen, kun je <a href=http://$!{SITE.domain}/customerservices>hier je bestelling volgen</a>.",
+    "PAYSUCCESS_TITLE": "Orderbevestiging - ID: $!{order.orderNo}",
+    "THE_TEAM": "Het $!{SITE.capName} Team",
+    "REGARDS": "Groeten",
+    "HOLIDAY_FOR_YEAR": "De verzending kan vertraging oplopen vanwege de Chinese nieuwjaarsvakantie. We stellen uw geduld en begrip zeer op prijs."
+  },
+  "SHIP_NOTICE": {
+    "YOUR_ORDER_HAS_BEEN_SHIPPED_OUT": "Kennisgeving van levering",
+    "WE_HAVE_SHIPPED_OUT_YOUR_ORDER": "We hebben uw bestelling $!{order.orderNo} verzonden.",
+    "HERE_IS_YOUR_TRACKING_INFORMATION": "Hier zijn uw trackinggegevens:",
+    "THANK_YOU": "Bedankt voor het winkelen bij $!{SITE.name}.",
+    "SI_A_PRESALE": "is een pre-sale item en gepland voor verzending door",
+    "WE_ARE_PLEASED": "We zijn verheugd u te kunnen meedelen dat het artikel eerder is verzonden dan verwacht.",
+    "THE_TEAM": "Het $!{SITE.capName} Team",
+    "REGARDS": "Groeten"
+  },
+  "OUT_OF_STOCK": {
+    "OUT_OF_STOCK_NOTIFICATION": "Voorraad op",
+    "THANK_YOU_FOR_SHOPPING_WITH": "Bedankt voor het shoppen bij $!{SITE.topDomain}. Voor uw bestelling $!{order.orderNo} moeten we u helaas mededelen dat het volgende artikel niet op voorraad is:",
+    "NO_WORRY_YOU_CAN_CHOOSE_EITHER_SOLUTION_BELOW": "<div>Maak je geen zorgen, je kunt een van de onderstaande oplossingen kiezen:</div><div>1)【Aanbevolen!】Kies een ander item van maximaal <b>$!{currencyChangePrice}</b> op onze website <a href =\"$!{SITE.url}\">$!{SITE.topDomain}</a> . Laat ons de SKU of de URL weten door op deze e-mail te reageren en we zullen deze voor u vervangen;</div><div>2) Accepteer een terugbetaling van <b>$!{currencyReturnPrice}</b>.</div> ><div>Laat ons uw beslissing zo snel mogelijk weten en wij zullen u helpen.</div>"
+  },
+  "ORDERNO_UPDATE": {
+    "CHANGE_OF": "Wijziging scheepsnummer",
+    "TRACKING_NO_IS_UPDATED_FOR": "Trackingnummer is bijgewerkt voor $!{order.orderNo}",
+    "WE_FEEL_SO_SORRY_FOR_THE_INCONVENIENCE_CAUSED": "Het spijt ons zeer voor het veroorzaakte ongemak.",
+    "TRACKING_NUMBER_FOR_ORDER": "Trackingnummer voor bestelling $!{order.orderNo} is bijgewerkt, negeer het vorige en gebruik het nieuwe om het te volgen.",
+    "THE_ESTIMATED_TIME_OF_ARRIVAL_IS_X_DAYS": "De geschatte aankomsttijd is 7-15 dagen."
+  },
+  "CONTACT_US": {
+    "THANKS_FOR_SUBMITTING_A_TICKET": "Bedankt voor het insturen van een ticket",
+    "YOUR_TICKET_HAS_BEEN_SUBMITTED_SUCESSFULLY": "<div>Beste klant,</div><div>Uw ticket is succesvol ingediend, onze klantenvertegenwoordigers zullen u binnen 36 uur antwoorden. Gelieve het antwoord af te wachten.</div><div>Hieronder vindt u de details van uw bericht:</div><div>type: $!{subject}</div><div>e-mail: $!{email}< /div><div>naam: $!{firstName} $!{lastName}</div><div>content: $!{content}</div>"
+  },
+  "CYBER_MONDAY_SALE_IS_OPEN": {
+    "HAVING_TROUBLE_VIEWING_THIS_EMAIL": "Problemen met het bekijken van deze e-mail? <onbroswer style=\"color:#171212;\">KLIK HIER>></onbroswer>",
+    "HURRY_TO_ENJOY_CYBER_MONDAY_SALE_UP_TO_X_OFF": "Haast je om te genieten van Cyber ​​Monday Sale, tot 80% korting >>",
+    "SHOP_NOW": "winkel nu"
+  },
+  "GIVE_FEEDBACK": {
+    "CONTENT": "<div>Beste $!{firstName}, <br><br>Je ontvangt deze e-mail omdat je vroeger winkelde bij $!{NAME}.com. <br><br>We willen je graag uitnodigen om ons te helpen een positieve feedback te geven op Facebook. Voor uw tijd bieden we u een waardebon van $20 voor uw volgende aankoop. <br><br>Laat het ons weten als u geïnteresseerd bent en wij sturen u de link naar het feedbackformulier. <br><br>Met vriendelijke groet, <br><br>Het $!{NAME} Team</div>"
+  },
+  "UNPAID_ORDERS_ONE": {
+    "DID_YOU_FORGET_SOMETHING": "Ben je iets vergeten?",
+    "GET_EXTRA_OFF_NOW": "Profiteer nu van 20% extra korting!",
+    "NOTICED_COMMPLET_ORDER": "We hebben gemerkt dat u $!{SITE.name} heeft verlaten zonder uw bestelling af te ronden.",
+    "COMMPLET_ENJORY_OFF": "Rond nu uw bestelling af en profiteer van $!{SITE.discountRate} KORTING!",
+    "THIS_OFFER_EXPIRES": "Schiet op, deze aanbieding verloopt over 30 minuten!",
+    "PAY_NOW_SAVE": "Betaal nu en bespaar $!{SITE.discountRate}",
+    "THE_TEAM": "Het $!{SITE.capName} Team"
+  },
+  "UNPAID_ORDERS_TWO": {
+    "LOOKS_LIKE_LEFT_SOMETHING_BEHIND": "Het lijkt erop dat je iets hebt achtergelaten...",
+    "FLYING_OUT_OF_STOCK": "De items die je gisteren in je winkelwagen hebt gelaten, vliegen door de voorraad heen. De laatste hebben we voor je bewaard.",
+    "GET_WITH_OFFER_DISCOUNT": "Kom terug en koop je favorieten met $!{SITE.discountRate} OFF-korting.",
+    "COMPLETE_YOUR_ORDER": "Voltooi uw bestelling voordat de tijd om is.",
+    "PAY_NOW_SAVE": "Betaal nu en bespaar $!{SITE.discountRate}",
+    "THE_TEAM": "Het $!{SITE.capName} Team"
+  },
+  "UNPAID_ORDERS_THREE": {
+    "OFFER_EXPIRES_SOON": "Je hebt een onbetaalde bestellings-ID $!{order.orderNo} achtergelaten en deze wordt binnenkort geannuleerd.",
+    "LAST_CHANCE": "Laatste kans!",
+    "WAITING_FOR_YOUR_RETURN": "Uw winkelwagen bij $!{SITE.name} is gereserveerd en wacht op uw terugkeer! Nu afrekenen met $!{SITE.discountRate} KORTING!",
+    "OFFER_EXPIRES": "Aanbieding verloopt over 30 minuten. Haast je",
+    "PAY_NOW_SAVE": "Betaal nu en bespaar $!{SITE.discountRate}",
+    "THE_TEAM": "Het $!{SITE.capName} Team"
+  },
+  "ERP_REFUND_ONE": {
+    "REFUND_BEING_PROCESSED": "Uw terugbetaling van $currency_code $amount wordt verwerkt",
+    "YOUR_REFUND_REQUEST_FOR_THE_ORDER": "Uw terugbetalingsverzoek voor de bestelling ($order_sn) is ontvangen. Het terug te betalen bedrag is $currency_code $amount.",
+    "THE_NORMAL_REFUND_PROCESSING_TIME": "De normale verwerkingstijd voor terugbetalingen is ongeveer 7 werkdagen. Zodra uw terugbetaling is uitgevoerd, ontvangt u nog een e-mail van ons.",
+    "SHOULD_YOU_NEED_ANY": "Mocht u verdere hulp nodig hebben, aarzel dan niet om contact met ons op te nemen.",
+    "THE_TEAM": "Het $site_url Team"
+  },
+  "ERP_REFUND_TWO": {
+    "REFUND_BEING_ISSUED": "Uw $currency_code $amount wordt terugbetaald",
+    "WE_HAVE_ISSUED_THE_REFUND": "We hebben de terugbetaling uitgevoerd voor bestelling $order_sn. Uw terugbetaling wordt toegepast op uw creditcard of originele betaalmethode.",
+    "FOR_PAYPAL_PAYMENT": "Voor Paypal-betalingen ziet u de terugbetaling op uw rekening bijgeschreven zodra u dit controleert. Bij creditcardbetalingen kan het tot 30 dagen duren voordat het op uw rekening wordt weergegeven. U kunt contact opnemen met de bank die uw kaart heeft uitgegeven voor meer informatie.",
+    "PLEASE_CONTACT_US": "Neem contact met ons op als er problemen zijn.",
+    "THE_TEAM": "Het $site_url Team"
+  },
+  "ERP_REFUND_THREE": {
+    "REFUND_BEING_ISSUED": "Uw $currency_code $amount wordt terugbetaald",
+    "WE_ARE_SORRY_THAT_SOME_ITEM": "Het spijt ons dat sommige artikelen van bestelling $order_sn. zijn momenteel niet op voorraad en daarom zullen we u moeten terugbetalen. Uw terugbetaling wordt binnenkort toegepast op uw creditcard of originele betaalmethode.",
+    "FOR_PAYPAL_PAYMENT": "Voor PayPal-betalingen ziet u de terugbetaling op uw account bijgeschreven. Bij creditcardbetalingen kan het tot 30 dagen duren voordat het op uw rekening wordt weergegeven. U kunt contact opnemen met de bank die uw kaart heeft uitgegeven voor meer informatie.",
+    "PLEASE_CONTACT_US": "Neem contact met ons op als er problemen zijn.",
+    "THE_TEAM": "Het $site_url Team"
+  },
+  "COUPON_OR_REFUND": {
+    "REGARDING_ORDER_CANCELLATION": "Met betrekking tot het annuleren van bestellingen - ID: $order_id",
+    "THANK_YOU_FOR_YOUR_RECENT": "Bedankt voor uw recente aankoop bij ons.",
+    "CONSIDERING_THE_CURRENT": "Gezien de huidige situatie met het coronavirus, moeten we u mededelen dat we uw ordernummer: $order_id moeten annuleren vanwege de vertraging van onze leverancier.",
+    "IN_EFFORTS_TO_MAKE_IT_UP": "Om het voor u goed te maken, willen we u de onderstaande twee opties aanbieden:",
+    "OPTIONS_1": "1. We zullen u de originele bestelprijs contante coupon + USD10 korting geven bij verbruik van USD80 (of gelijkwaardige USD). U kunt voor uw volgende aankoop op onze website;",
+    "OR": "OF,",
+    "OPTIONS_2": "2. We zullen u een volledige terugbetaling doen op uw rekening.",
+    "PLEASE_LET_US_KNOW": "Laat ons weten welke optie uw voorkeur heeft.",
+    "CASE_NO": "Zaak nr: $order_sn",
+    "THE_TEAM": "Het $site_url Team"
+  },
+  "PICK_UP_PACKAGE": {
+    "PICK_UP": "pak A -- $FullSiteName op",
+    "FOR_YOUR_ORDER": "Voor uw bestelling $OrderNo",
+    "SINCERELY_SORRY_FOR": "Onze oprechte excuses voor het veroorzaakte ongemak.",
+    "THE_PACKAGE_HAS_BEEN_SENT": "Het pakket is verzonden. Volgens de trackinginformatie is het nu in uw land.",
+    "COULD_YOU_PLEASE_CONTACT": "Kunt u contact opnemen met uw lokale servicestation (P: $Phone) voor meer informatie over uw pakket (volgnummer $ExpressNo en link: https://t.17track.net/en)?",
+    "HOPE_YOU_GET": "Hoop dat je het snel krijgt.",
+    "HAVE_A_NICE_DAY": "Prettige dag."
+  },
+  "COD": {
+    "YOU_ORDER_HAS_BEEN": "Uw bestelling is succesvol geplaatst",
+    "YOU_ORDER_HAS_BEEN_PLACED_SUCCESSFULLY": "Uw bestelling is succesvol geplaatst. Bestelnummer $!{order.orderNo}. Het pakket duurt ongeveer 7 tot 25 dagen nadat we de bestelling hebben verzonden. Er wordt een e-mail met trackinginformatie naar u verzonden zodra de bestelling is verzonden.",
+    "NOTE": "Opmerking:",
+    "CASH_ON_DELIVERY": "* Onder rembours",
+    "PLEASE_PAY_WHEN": "* Gelieve te betalen wanneer het artikel u bereikt",
+    "DO_NOT_BE": "* Laat u niet misleiden door fraudeurs die u misleiden om via welke kanalen dan ook geld over te maken.",
+    "WE_PROVIED_CASH": "* Wij bieden alleen remboursservice aan."
+  },
+  "DELAY_IN_DELIVERY": {
+    "PER_SALE": "Artikelvertraging voorverkoop",
+    "DEAR": "Beste",
+    "THANK_YOU_SHIPPING": "Bedankt voor het winkelen bij $!{SITE.name}",
+    "FOR_THIS": "Voor dit pre-sale-artikel zal er vanwege een onvoorzien probleem een ​​kleine vertraging optreden bij het verzenden van deze bestelling.",
+    "WE_APOLOGIZE": "Onze excuses voor de vertraging en we willen u een tegoedbon aanbieden voor het ongemak $!{SITE.contactEmail}.",
+    "WE_APPRECIATE": "We stellen uw begrip in deze kwestie zeer op prijs. U ontvangt een melding zodra het artikel klaar is voor verzending.",
+    "THANK_YOU": "Bedankt voor het kiezen van $!{SITE.name}",
+    "SINCERELY": "Met vriendelijke groet, $!{SITE.name}"
+  },
+  "REPUTATION_THIRD_COMMENT_COUPON": {
+    "THIRD_COMMENT_COUPON_TITLE": "Gefeliciteerd! Een kans om een ​​coupon van $!{couponMoney} te krijgen!",
+    "DEAR": "Beste",
+    "REPUTATION_THIRD_COMMENT_DES1": "Geniet van uw online winkelervaring op $!{SITE.name}. We hebben nog een grote verrassing voor u! Je hebt een kans om in totaal $!{couponMoney} Coupon te krijgen!",
+    "COUPON1": "Waardebon1:",
+    "REPUTATION_THIRD_COUPON1_DES1": "Als je je leuke online winkelervaring op $!{SITE.name} kunt delen met trustpilot, en een screenshot van je review naar ons kunt sturen. U krijgt een waardebon van $!{coupon1Money}!",
+    "REPUTATION_THIRD_COUPON1_DES2": "Klik op de onderstaande link om uw leuke ervaring te delen op $!{SITE.name}：",
+    "REPUTATION_THIRD_COUPON1_DES3": "Klik op de onderstaande link om een ​​screenshot van uw review op trustpilot naar ons te uploaden:",
+    "COUPON2": "Waardebon2:",
+    "REPUTATION_THIRD_COUPON2_DES1": "Als u uw leuke online winkelervaring op $!{SITE.name} op onze website kunt delen, krijgt u ook een $!{coupon2Money}-tegoedbon!",
+    "REPUTATION_THIRD_COUPON2_DES2": "Klik hieronder op het product waarover u ervaringen wilt delen:",
+    "TABLE_HEAD1": "projecteren",
+    "TABLE_HEAD2": "eenheid prijs",
+    "TABLE_HEAD3": "Hoeveelheid",
+    "TABLE_HEAD4": "Totale projectprijs"
+  },
+  "REPUTATION_COMMENT_COUPON": {
+    "REPUTATION_COMMENT_COUPON_TITLE": "Hier is je bon! Haal je stijl nu in huis!",
+    "DEAR": "Beste",
+    "REPUTATION_COMMENT_DES1": "Gefeliciteerd! U heeft met succes de volgende coupon ontvangen voor $!{siteName}",
+    "REPUTATION_COMMENT_DES2": "U kunt de kortingsbon nu gebruiken! Haal het in huis als je van een van deze houdt!"
+  },
+  "PACKAGE_DELAY": {
+    "TITLE": "D0610: Melding van ordervertraging - ID: [$order_id]",
+    "DEAR": "Beste",
+    "HOPE_U_DOING_WELL": "Hoop dat het goed met je gaat vandaag.",
+    "ARRIVED_TIME": "Uw pakket is al om $amount lokale tijd in uw land aangekomen.",
+    "TRACK_NUMBER": "Dit is het trackingnummer: ($site_urlcom)",
+    "TRACK_SITE": "Je kunt het volgen via deze link: <a href=\"https://www.17track.net/en\">https://www.17track.net/en</a>",
+    "DELIVERY_SEEMS_TO_BE_SOME_REASON": "De levering van de laatste kilometer lijkt echter om een ​​onverwachte reden te zijn vertraagd.",
+    "WE_ARE_TRYING_TO_ARRANGE_SHIPPING": "We doen nog steeds ons best om de verzending te regelen en ervoor te zorgen dat je het snel kunt krijgen.",
+    "YOUR_PATIENCE_APPREICATED": "Uw geduld wordt zeer op prijs gesteld.",
+    "REGARDS": "Groeten",
+    "THE_TEAM": "Het $site_url Team",
+    "CASE_NO": "Zaak nr: $order_sn"
+  },
+  "REFUN_TO_CUSTOMER_CREATE_CASH": {
+    "TITLE": "Met betrekking tot het annuleren van bestellingen - ID: $order_id",
+    "HELLO": "Hallo",
+    "TANK_YOU_FOR_RECENT_PURCHASE": "Bedankt voor uw recente aankoop bij ons.",
+    "SORRY_INFORM_CANCEL_SUPPLIER": "Het spijt ons u te moeten mededelen dat we uw bestelling moeten annuleren vanwege de vertraging van onze leverancier.",
+    "IN_EFFORTS_TO_MAKE_OFFER_YOU": "Om het voor u goed te maken, willen we u dit aanbieden:",
+    "AMOUNT_COUPON_ORDER_AMOUNT": "$amount contante coupon (extra 15% meer dan uw oorspronkelijke bestelbedrag)",
+    "SIMPLY_YOU_WILL_IMMEIDATELY": "Klik gewoon <a href=\"$site_urlcom\" style=\"font-weight:bold;font-size:16px;\">hier</a> en je ontvangt de couponcode onmiddellijk.",
+    "REGARDS": "Groeten",
+    "THE_TEAM": "Het $site_url Team",
+    "CASE_NO": "Zaak nr: $order_sn"
+  },
+  "FOR_NEW_SUBSCRIBER": {
+    "TITLE": "Voor nieuwe abonnee!",
+    "CODE": "CODE",
+    "COUPON": "$!{followCoupon}",
+    "THANK_YOU_FOR_CREATING_YOUR_ACCOUNT_WELCOME": "Bedankt voor het aanmaken van een account bij $!{SITE.capDomain}, en welkom！<br>Inloggen: $!{user.email}<br><br>Als u uw wachtwoord opnieuw wilt instellen, <a href=\"$!{recoverUrl}\">klik hier</a> om verder te gaan."
+  },
+  "REGISTER_SUBSCRIBE": {
+    "SUBSCRIBE_SUCCESSFULLY": "Abonneer succesvol! Controleer uw coupon in deze e-mail>>>",
+    "WELCOME_TO": "Welkom bij $!{SITE.capName}! Hier is je nieuwe gebruikersbonus!",
+    "TOP_PICKS": "TOP KEUZES",
+    "SHOW_NOW": "WINKEL NU",
+    "ONE_LAST_STEP": "Een laatste stap!",
+    "SUBSCRIBE_TO_OUR_NEWSLETTER_WILL_GET": "Schrijf je in op onze nieuwsbrief en ontvang 15% extra korting!",
+    "SUBSCRIBE_NOW": "Abonneer nu",
+    "NEW_FRIENDS_GET_EXTRA": "Nieuwe vrienden krijgen een extra kortingsbon van 10%!",
+    "SUBSCRIBE_POPPPIE": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s894/common/19081/1282u139f5470e24546e48ce95bab70f9445c.png'/>",
+    "REGISTER_SUBSCRIBE_POPPPIE": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s894/common/19081/1282uc48c95852c3e47279e8da208bcc53fab.png'/>",
+    "REGISTER_NO_SUBSCRIBE_POPPPIE": "<img style='width: 100%;margin-bottom:5px' src='https://ups.aopcdn.com/s894/common/19081/1282ud63a2806d0524fcda8bf82eb16adb162.png'/>",
+    "REGISTER_SUBSCRIBE_BOY": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s-2/common/18717/1u09c8320eed6b485dade57ab6ded7920f.jpg'/>",
+    "REGISTER_SUBSCRIBE_FAMILY": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s-2/common/18717/1u90cce6a132a24f2c8514e17c232543cf.jpg'/>",
+    "REGISTER_SUBSCRIBE_GIRL": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s-2/common/18717/1u05ea03f9981f45eda662c217dc9f838f.jpg'/>",
+    "REGISTER_SUBSCRIBE_MOM": "<img style='breedte: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520ubf2f1e2d120c49079045b905ec336ec1.png'/>"
+  },
+  "NEW_UNPAID_ORDERS": {
+    "TITLE_ONE": "Ben je iets vergeten?",
+    "NOTICED_COMMPLET_ORDER_ONE": "We hebben gemerkt dat u $!{SITE.capName} heeft verlaten zonder uw bestelling af te ronden.<br>Voltooi uw bestelling nu en profiteer van $!{SITE.discountRate} KORTING!",
+    "COUNT_DOWN_ONE": "Schiet op, deze aanbieding verloopt over 30 minuten!",
+    "TITLE_TWO": "Het lijkt erop dat je iets hebt achtergelaten...",
+    "NOTICED_COMMPLET_ORDER_TWO": "De artikelen die je in je winkelwagen hebt achtergelaten, zijn bijna uitverkocht. De laatste hebben we voor je bewaard.",
+    "COME_BACK_AND_GET": "Kom terug en ontvang je favorieten met 20% korting.",
+    "COUNT_DOWN_TWO": "Voltooi uw bestelling voordat de tijd om is.",
+    "TITLE_THREE": "Uw $!{SITE.discountRate} aanbieding verloopt binnenkort...",
+    "NOTICED_COMMPLET_ORDER_THREE": "Laatste kans!<br>Uw winkelwagentje bij $!{SITE.capName} is gereserveerd en wacht op uw terugkeer! Nu afrekenen met $!{SITE.discountRate} KORTING!",
+    "COUNT_DOWN_THREE": "Aanbieding verloopt over 30 minuten. Haast je!",
+    "CHECK_TO_PAY": "CHEQUE OM TE BETALEN",
+    "UNSUBSCRIBE": "UITSCHRIJVEN",
+    "CONTACT_US": "NEEM CONTACT MET ONS OP",
+    "TRACK_ORDER": "ORDER VOLGEN",
+    "CANCEL_ORDER": "ANNULEER BESTELLING",
+    "SECURED_PAYMENTS": "100% beveiligde betalingen",
+    "CUSTOMER_SERVICE_MAIL": "Klantenservice mail",
+    "VARIETY_OF_DAILY_CLOTHING": "Verscheidenheid aan dagelijkse kleding",
+    "AFTER_PAYMENT": "Na betaling zullen we zo snel mogelijk beginnen met het verwerken van uw bestelling.",
+    "THE_TEAM": "$!{SITE.capName} Team"
+  },
+  "DISPUTE_TEMPLATE": {
+    "I_AM_YOUR_DEDICATED_SERVICE_SPECIALIST": "Ik ben uw toegewijde servicespecialist, mijn naam is Molly, leuk u te ontmoeten.",
+    "GLAD_TO_EMAIL_YOU_AGAIN": "Blij je weer te mailen.",
+    "I_CHECKED_YOUR_ORDER_STATUS_1": "Ik heb de status van je bestelling $!{order_sn} gecontroleerd. Het laat zien dat je iets in je bestelling wilt wijzigen. Beantwoord deze e-mail en laat me weten welke maat, kleur of verzendmethode je wilt wijzigen. We zullen dit zo snel mogelijk voor je regelen.",
+    "I_CHECKED_YOUR_ORDER_STATUS_2": "Ik heb de status van je bestelling $!{order_sn} gecontroleerd. Het geeft aan dat je de maat van je bestelling wilt wijzigen. Beantwoord deze e-mail en laat me weten welke maat je wilt wijzigen. Wij regelen het zo snel mogelijk voor u.",
+    "I_CHECKED_YOUR_ORDER_STATUS_3": "Ik heb de status van je bestelling $!{order_sn} gecontroleerd. Het geeft aan dat u de adresgegevens moet wijzigen. Beantwoord deze e-mail en vertel ons uw adresgegevens. We zullen het wijzigen en de verzending zo snel mogelijk regelen.",
+    "I_CHECKED_YOUR_ORDER_STATUS_4": "Ik heb de status van je bestelling $!{order_sn} gecontroleerd. Het geeft aan dat u de bezorgmethode moet wijzigen. Beantwoord deze e-mail en vertel ons welke bezorgmethode u wilt wijzigen. We zullen voor u veranderen en de verzending zo snel mogelijk regelen. Dank u.",
+    "I_CHECKED_YOUR_ORDER_STATUS_5": "Wil je je bestelling $!{order_sn} annuleren? Het spijt me dat te horen, ik denk dat we ons product en onze service in de toekomst nog steeds moeten verbeteren, dus sorry voor het eventuele ongemak in deze zaak.<br>Uw product is feitelijk verpakt en verwerkt door logistiek, dus we zijn blij om te hopen dat u de bestelling behoudt, bieden wij u 20% korting als onze klanttevredenheid. Beantwoord deze e-mail om de couponcode te ontvangen.",
+    "AS_FOR_YOUR_DISPUTED_ORDER": "Wat betreft uw betwiste bestelling $!{order_sn}, het spijt ons dat we uw antwoord nog niet hebben ontvangen. Wat betreft de eerder genoemde vraag, we hopen uw antwoord te ontvangen en dan kunnen we uw bestelling zo snel mogelijk voortzetten.",
+    "AS_FOR_YOUR_DISPUTED_ORDER_2": "Over uw eerdere betwiste bestelling $!{order_sn}, we hebben uw antwoord nog niet ontvangen, ook houden we de goederen nog steeds voor u, omdat het product nu als warme broodjes over de toonbank gaat, de voorraad raakt op, daarom hopen we uw antwoord en dan kunnen we doorgaan met uw bestelling, we horen graag van u.",
+    "IF_YOU_HAVE_ANY_OTHER_CONCERN": "Laat het me weten als je nog andere zorgen hebt. Bedankt.",
+    "PLEASE_CONTACT_US_IF_ANY_QUERY": "Neem contact met ons op als u vragen heeft, dank u.",
+    "FRIENDLY_REMINDER": "(Vriendelijke herinnering: er worden extra kosten in rekening gebracht door de logistiek, let alstublieft op)."
+  },
+  "CANCELLATION_ORDER": {
+    "PACKAGE_ORDER": "Update pakketinformatie met betrekking tot uw bestellings-ID $order_sn",
+    "CANCELLATION_OF_ORDER": "Annulering van bestelling id $order_sn",
+    "CANCELLATION_OF_ORDER_ID": "Annulering van bestellings-ID: $order_sn",
+    "THANK_YOU_FOR_YOUR_SHOPPING": "Bedankt om bij ons te winkelen! Onze excuses voor het annuleren van uw bestelling id.$order_sn vanwege de reden: XXX",
+    "CUSTOMER_SERVICES": "Hieronder staan ​​de gegevens van de bestelling id.$order_sn. Neem voor meer informatie over de annulering contact met ons op via service@popopie.com.",
+    "WELCOME_TO_SHOP_AGAIN": "Welkom om weer te winkelen.",
+    "LIMITED_STOCK": "beperkte voorraad.",
+    "INVALID_ADDRESS": "Onvolledige leveringsinformatie of ongeldig adres.",
+    "PACKAGE_RETURNED": "Pakket wordt geretourneerd i.v.m. de aangepaste regelgeving.",
+    "HIGH_RISK_TRANSACTION": "Mislukte betaling of vermoede transactie met hoog risico.",
+    "CUSTOMER_REQUEST": "Annuleringsverzoeken van de klant.",
+    "HI": "Hallo $!{first_name},",
+    "PACKAGE": "pakket",
+    "ORDER": "Volgorde",
+    "ITEM": "Item",
+    "STATUS": "Toestand",
+    "SHIPPED": "verzonden",
+    "VIEW_MY_ORDER": "Bekijk mijn bestelling",
+    "PROCESSING": "Verwerken",
+    "TRACK_MY_ORDER": "Traceer mijn bestelling",
+    "THANK_YOU_FOR_SHOPPING_WITH_US": "Bedankt om bij ons te winkelen! Voor een snelle levering splitsen we uw bestelling op in meerdere pakketten en verzenden we eerst het/de beschikbare artikel(en).<br> Er worden geen extra verzendkosten in rekening gebracht.",
+    "BELOW_ARE_THE_PACKAGE_INFORMATION": "Hieronder vindt u de pakketinformatie. Als je vragen hebt, neem dan contact met ons op via <a href='mailto:$!{SITE.contactEmail}' style='color: $SITE.color'>$!{SITE.contactEmail}</a>.",
+    "OTHER_ITEMS_ARE_BEING_PACKAGED": "Andere items worden verpakt en zullen binnenkort worden verzonden. U ontvangt na levering een e-mailmelding. Controleer de e-mail zorgvuldig."
+  },
+  "EVALUATION_OF_ARRIVED_GOODS": {
+    "REFUND_BEING_TITLE": "Wij nodigen u van harte uit om uw winkelervaring te delen",
+    "WISH_YOU_ARE_FAVOR": "We wensen u gunst voor artikelen die bij ons zijn gekocht en kijken ernaar uit u weer van dienst te zijn. We nodigen je graag uit om je winkelervaring en beoordelingen te delen op onze website of via onze sociale platforms. We bieden ook een cupon van $10 voor uw volgende aankoop.",
+    "IF_WE_DID_NOT_MEET_YOUR_EXPECTATION": "Als we helaas niet aan uw verwachtingen hebben voldaan, neem dan op elk moment contact met ons op om uw onvrede weg te nemen en het probleem op te lossen.",
+    "MANY_THANKS_AND_HOPE": "Hartelijk dank en veel plezier met winkelen bij ons.",
+    "THE_TEAM": "$site_url Team"
+  }
+}
+    var data_en = {
+  "COMMON": {
+    "HI": "Hi",
+    "ITEM(S)": "ITEM(S)",
+    "UNIT_PRICE": "UNIT PRICE",
+    "QUANTITY": "QUANTITY",
+    "AMOUNT": "AMOUNT",
+    "ON_SALE": "On Sale",
+    "COLOR": "Color",
+    "SIZE": "Size",
+    "FIRST_NAME": "First Name",
+    "LAST_NAMES": "Last Names",
+    "ADDRESS_LINE1": "Address Line1",
+    "COUNTRY": "Country",
+    "CITY": "City",
+    "POSTAL_CODE": "Postal Code",
+    "TRACKING_NUMBER": "Tracking Number",
+    "TRACKING_WEBSITE": "Tracking website",
+    "DISPATCHED": "Dispatched within",
+    "DAYS": "days.",
+    "REGARDS": "Regards",
+    "BEST_REGARDS": "Best Regards",
+    "DEAR": "Dear",
+    "DISCOUNT": "Discount",
+    "TOTAL": "Total",
+    "SUBTOTAL": "Subtotal",
+    "SHIPPING": "Shipping",
+    "YOURS_SINCERELY": "Yours sincerely,",
+  "THE_TEAM": "The $!{SITE.capName} Team",
+    "SITE_NAME_TEAM": "$!{FullSiteName} Team"
+  },
+  "HEADER": {
+    "SECURED_PAYMENTS": "100% Secured <br> Payments",
+    "CUSTOMER_SERVICE_MAIL_WHATS_APP": "Customer Service <br> Mail&Whats app",
+    "HIGHEST_QUALITY_GUARANTEE": "Highest Quality <br> Guarantee",
+
+    "CREATE_YOUR_OWN": "Create Your Own",
+    "FACE_PRINT": "Face Print",
+    "UNIQUE_DESIGN_FASHION": "Unique Design Fashion",
+    "UNIQUE_DESIGN_ACCESSORIES": "Unique Design Accessories",
+    "GIFT&OCCASIONS": "Gift & Occasions",
+    
+    "HOT_SALES":"Hot Sale",
+    "NEW_ARRIVALS":"New In",
+    "MATCHING_OUTFITS":"Baby",
+    "BOYS":"Toddler",
+    "GIRLS":"Kids"
+  },
+  "FOOTER": {
+    "THIS_EMAIL_WAS_SENT_FROM_A_NOTIFICATION_ONLY_ADDRESS_THAT_CANNOT_ACCEPT_INCOMING_EMAIL": "This email was sent from a notification-only address that cannot accept incoming email.",
+    "PLEASE_DO_NOT_REPLY_TO_THIS_MESSAGE_IF_YOU_HAVE_ANY_QUESTIONS_OR_CONCERNS_PLEASE": "Please do not reply to this message. If you have any questions or concerns, please",
+    "EMAIL_US": "email_us",
+    "IF_YOU_HAVE_ANY_QUESTIONS":"If you have any questions, please feel free to contact via: <a href='mailto:$!{SITE.contactEmail}' style='color: $SITE.color'>$!{SITE.contactEmail}</a>.",
+    "READ_OUR_PRIVACY_POLICY":"Read our privacy policy"
+  },
+  "NEW_REGISTER": {
+    "WELCOME_TO": "Welcome to $!{SITE.capDomain}",
+    "YOU_CAN_LOGIN_YOUR_ACCOUNT_TO_MANAGE_YOUR_ORDER_USING_THE_CREDENTIAL_BELOW": "You can login your account to manage your order using the credential below:<br>Login: $!{user.email}<br>Password: $!{user.password}<br><br>If you want to reset your password, please <a href=\"$!{recoverUrl}\">click here</a> to proceed."
+  },
+  "NEW_REGISTER_SELF": {
+    "WELCOME_TO": "Welcome to $!{SITE.capDomain}",
+    "BODY_CONTENT": "Thanks for joining $!{SITE.name}'s family. Simply <a href='$!{SITE.url}' target='_blank'>clicking here</a> to start your journey. Enjoy your shopping time!<br><br>If you have any questions, please feel free to <a href='$!{SITE.contactUsUrl}' target='_blank'>contact us</a>."
+  },
+  "QUICK_REGISTER": {
+    "WELCOME_TO": "Welcome to $!{SITE.capDomain}",
+    "THANK_YOU_FOR_CREATING_YOUR_ACCOUNT_WELCOME": "Thanks for creating an account at $!{SITE.capDomain}, and welcome！<br>Login: $!{user.email}<br>Password : $!{user.password}<br><br>If you want to reset your password, please <a href=\"$!{recoverUrl}\">click here</a> to proceed.",
+    "REGISTER_TITLE": "$!{words.title}",
+    "REGISTER_CODE": "$!{words.coupon.label}",
+    "GET_STARTED": "GET STARTED",
+    "CODE": "CODE"
+  },
+  "FIND_PASSWORD": {
+    "CUSTOMER_ACCOUNT": "Reset your password",
+    "THANKS_FOR_SUBMITTING_A_TICKET": "Thanks for submitting a ticket",
+    "DEAR": "Dear",
+    "YOU_HAVE_REQUESTED_TO_HAVE_YOUR_PASSWORD_RESET_FOR_YOUR_ACCOUNT_AT": "You have requested to have your password reset for your account at $!{SITE.capName}",
+    "PLEASE_VISIT_THIS_URL_TO_RESET_YOUR_PASSWORD": "Please click the button below to reset your password.",
+    "IF_YOU_RECEIVED_THIS_EMAIL_IN_ERROR_YOU_CAN_SAFELY_IGNORE_THIS_EMAIL": "If you received this email in error, you can safely ignore this email.",
+    "SINCERELY": "Sincerely",
+    "RESET_PASSWORD": "RESET PASSWORD",
+    "THE_TEAM": "The $!{SITE.capName} Team",
+    "HELLO": "Hello"
+  },
+  "PAYSUCCESS": {
+    "YOU_HAVE_SUCCESSFULLY_PAID_FOR_ORDER": "Pay for success",
+    "THANK_YOU_FOR_YOUR_ORDER": "Thank you for shopping with us. Your order $!{order.orderNo} is now being processed and will be dispatched normally within 7 days.",
+    "SUPER_SAVINGS": "Super Savings: 7 - 15 Business Days",
+    "STANDARD_SHIPPING": "Standard Shipping: 6 - 8 Business Days",
+    "EXPRESS_SHIPPING": "Express Shipping: 3 - 6 Business Days",
+    "IF_YOU_PAID_WITH_A_PAYPAL_ACCOUNT_OR_CREDIT_CARD": "If you paid with a paypal account or credit card, <br/> the merchant name \" <b>Orderplus Intl.</b> \" will appear on your card statement.",
+    "WE_HAVE_RECEIVED_YOUR_PAYMENT_FOR_ORDER": "We have received your payment for order $!{order.orderNo}. You will find $!{SITE.topDomain} on your credit card statement if the payment is made by a credit card.",
+    "DELAYED_SHIPPING_NOTICE": "Delayed Shipping Notice",
+    "DELIVERY_OF_YOUR_ORDER": "Delivery of your order may probably be delayed due to the Chinese New Year holiday (from 21/1/2020 to 30/1/2020) as your order will be shipped from our warehouse in China.",
+    "ORDERS_RECEIVED_BEFORE1": "Orders received before 21/1/2020 should be shipped out between 30/1/2020 and 10/2/2020",
+    "ORDERS_RECEIVED_BEFORE2": "Orders received before 30/1/2019 should be shipped out between 10/2/2020 and 20/2/2020",
+    "ORDERS_PLACED_WITH_US": "Orders placed with us will be packed and shipped in the order that they were received, and while there may be a short delay in shipping, you can have every confidence that your order is secure and that you will receive what you ordered.",
+    "WISH_YOU": "Wish you a happy Chinese Lunar New Year!",
+    "CUSTOMER_SERVICES": "If you do not receive our deliery notice after 7 days, you can <a href=http://$!{SITE.domain}/customerservices>track your order here</a>. ",
+    "PAYSUCCESS_TITLE": "Order Confirmation - ID: $!{order.orderNo}",
+    "THE_TEAM": "The $!{SITE.capName} Team",
+    "REGARDS": "Regards",
+    "HOLIDAY_FOR_YEAR": "The dispatch may delay due to Chinese New Year Holiday. We appreciate your patience and understanding."
+  },
+  "SHIP_NOTICE": {
+    "YOUR_ORDER_HAS_BEEN_SHIPPED_OUT": "Delivery Notice",
+    "WE_HAVE_SHIPPED_OUT_YOUR_ORDER": "We have shipped out your order $!{order.orderNo}.",
+    "HERE_IS_YOUR_TRACKING_INFORMATION": "Here is your tracking information:",
+    "THANK_YOU": "Thank you for shopping at $!{SITE.name}.",
+    "SI_A_PRESALE": "is a pre-sale item and scheduled for shipping by",
+    "WE_ARE_PLEASED": "We are pleased to inform you that the item has been shipped out earlier than expected .",
+    "THE_TEAM": "The $!{SITE.capName} Team",
+    "REGARDS": "Regards"
+  },
+  "OUT_OF_STOCK": {
+    "OUT_OF_STOCK_NOTIFICATION": "Stock out",
+    "THANK_YOU_FOR_SHOPPING_WITH": "Thank you for shopping with $!{SITE.topDomain}. For your order $!{order.orderNo} we are sorry to inform you that the following item is out of stock:",
+    "NO_WORRY_YOU_CAN_CHOOSE_EITHER_SOLUTION_BELOW": "<div>No worry, you can choose either solution below:</div><div>1)【Recommended!】Choose another item of up to <b>$!{currencyChangePrice}</b> on our website <a href=\"$!{SITE.url}\">$!{SITE.topDomain}</a>&nbsp;. Let us know the SKU or the URL by responding to this email and we will replace it for you;</div><div>2) Accept a refund of <b>$!{currencyReturnPrice}</b>.</div><div>Please let us know your decision ASAP and we will assist accordingly.</div>"
+  },
+  "ORDERNO_UPDATE": {
+    "CHANGE_OF": "Change of ship number",
+    "TRACKING_NO_IS_UPDATED_FOR": "Tracking No. is updated for $!{order.orderNo}",
+    "WE_FEEL_SO_SORRY_FOR_THE_INCONVENIENCE_CAUSED": "We feel so sorry for the inconvenience caused.",
+    "TRACKING_NUMBER_FOR_ORDER": "Tracking Number for order $!{order.orderNo} is updated, please ignore the previous one and use the new one to track it.",
+    "THE_ESTIMATED_TIME_OF_ARRIVAL_IS_X_DAYS.": "The estimated time of arrival is 7-15 days."
+  },
+  "CONTACT_US": {
+    "THANKS_FOR_SUBMITTING_A_TICKET": "Thanks for submitting a ticket",
+    "YOUR_TICKET_HAS_BEEN_SUBMITTED_SUCESSFULLY": "<div>Dear customer,</div><div>Your ticket has been submitted sucessfully, our customer representatives will reply you within 36 hours. Please kindly wait for the reply.</div><div>Below are details of your message:</div><div>type: $!{subject}</div><div>email: $!{email}</div><div>name: $!{firstName} $!{lastName}</div><div>content: $!{content}</div>"
+  },
+  "CYBER_MONDAY_SALE_IS_OPEN": {
+    "HAVING_TROUBLE_VIEWING_THIS_EMAIL": "Having trouble viewing this email? <onbroswer style=\"color:#171212;\">PLEASE CLICK HERE>></onbroswer>",
+    "HURRY_TO_ENJOY_CYBER_MONDAY_SALE_UP_TO_X_OFF": "Hurry to enjoy Cyber Monday Sale, up to 80% off >>",
+    "SHOP_NOW": "shop now"
+  },
+  "GIVE_FEEDBACK": {
+    "CONTENT": "<div>Dear $!{firstName}, <br><br>You received this email because you used to shop with $!{NAME}.com. <br><br>We would like to invite you to help us give a positive feedback on Facebook. For your time, we will offer you a $20 cash coupon for your next purchase. <br><br>Please let us know if you are interested and we will send you the link to the feedback form. <br><br>Regards, <br><br>The $!{NAME}  Team</div>"
+  },
+  "UNPAID_ORDERS_ONE": {
+    "DID_YOU_FORGET_SOMETHING": "Did you forget something?",
+  "GET_EXTRA_OFF_NOW": "Get extra 20% off now!",
+    "NOTICED_COMMPLET_ORDER": "We noticed you left $!{SITE.name} without completing your order.",
+    "COMMPLET_ENJORY_OFF": "Complete your order now and enjoy $!{SITE.discountRate} OFF!",
+    "THIS_OFFER_EXPIRES": "Hurry, this offer expires in 30 minutes!",
+    "PAY_NOW_SAVE": "Pay Now and Save $!{SITE.discountRate}",
+    "THE_TEAM": "The $!{SITE.capName} Team"
+  },
+  "UNPAID_ORDERS_TWO": {
+    "LOOKS_LIKE_LEFT_SOMETHING_BEHIND": "It looks like you left something behind…",
+    "FLYING_OUT_OF_STOCK": "The items you left in your cart yesterday are flying out of stock. We saved the last ones for you.",
+    "GET_WITH_OFFER_DISCOUNT": "Come back and get your favorites with $!{SITE.discountRate} OFF discount.",
+    "COMPLETE_YOUR_ORDER": "Complete your order before the time runs out.",
+    "PAY_NOW_SAVE": "Pay Now and Save $!{SITE.discountRate}",
+    "THE_TEAM": "The $!{SITE.capName} Team"
+  },
+  "UNPAID_ORDERS_THREE": {
+      "OFFER_EXPIRES_SOON": "You left an unpaid order ID $!{order.orderNo} and it will be canceled soon.",
+      "LAST_CHANCE": "Last chance!",
+      "WAITING_FOR_YOUR_RETURN": "Your shopping cart at $!{SITE.name} has been reserved and is waiting for your return! Checkout with $!{SITE.discountRate} OFF now!",
+      "OFFER_EXPIRES": "Offer expires in 30 minutes. Hurry",
+      "PAY_NOW_SAVE": "Pay Now and Save $!{SITE.discountRate}",
+      "THE_TEAM": "The $!{SITE.capName}Team"
+  },
+  "ERP_REFUND_ONE": {
+    "REFUND_BEING_PROCESSED": "Your $currency_code $amount refund is being processed",
+    "YOUR_REFUND_REQUEST_FOR_THE_ORDER": "Your refund request for the order ($order_sn) has been received. The refund amount is $currency_code $amount.",
+    "THE_NORMAL_REFUND_PROCESSING_TIME": "The normal refund processing time is approximately 7 business days. Once your refund is issued, you will receive another email from us.",
+    "SHOULD_YOU_NEED_ANY": "Should you need any further assistance, please do not hesitate to contact us.",
+    "THE_TEAM": "The $site_url Team"
+  },
+  "ERP_REFUND_TWO": {
+    "REFUND_BEING_ISSUED": "Your $currency_code $amount refund is being issued",
+    "WE_HAVE_ISSUED_THE_REFUND": "We have issued the refund for order $order_sn. Your refund will be applied to your credit card or original method of payment.",
+    "FOR_PAYPAL_PAYMENT": "For Paypal payment, you’ll see the refund credited to your account as soon as you check. For credit card payment, it can take up to 30 days to show up on your account. You can check with your card issuing bank for further information.",
+    "PLEASE_CONTACT_US": "Please contact us if there are any problems. ",
+    "THE_TEAM": "The $site_url Team"
+  },
+  "ERP_REFUND_THREE": {
+    "REFUND_BEING_ISSUED": "Your $currency_code $amount refund is being issued",
+    "WE_ARE_SORRY_THAT_SOME_ITEM": "We are sorry that some item(s) of order $order_sn. are currently out of stock and thus we will have to issue you a refund. Your refund will be applied to your credit card or original method of payment shortly.",
+    "FOR_PAYPAL_PAYMENT": "For Paypal payment, you’ll see the refund credited to your account. For credit card payment, it can take up to 30 days to show up on your account. You can check with your card issuing bank for further information.",
+    "PLEASE_CONTACT_US": "Please contact us if there are any problems.",
+    "THE_TEAM": "The $site_url Team"
+  },
+  "COUPON_OR_REFUND": {
+    "REGARDING_ORDER_CANCELLATION": "Regarding Order Cancellation - ID: $order_id",
+    "THANK_YOU_FOR_YOUR_RECENT": "Thank you for your recent purchase with us.",
+    "CONSIDERING_THE_CURRENT": "Considering the current corona virus situation, we feel sorry to inform you that we have to cancel your order number: $order_id due to the delay of our supplier.",
+    "IN_EFFORTS_TO_MAKE_IT_UP": "In efforts to make it up for you, we would like to offer you the bellowing two options:",
+    "OPTIONS_1": "1. We will provide you original order price cash coupon + USD10 off upon USD80 consumption (or equivalence USD). You can use for your next purchase on our website;",
+    "OR": "OR,",
+    "OPTIONS_2": "2. We will issue you a full refund to your account.",
+    "PLEASE_LET_US_KNOW": "Please let us know which option you will prefer.",
+    "CASE_NO": "Case no: $order_sn",
+    "THE_TEAM": "The $site_url Team"
+  },
+  "PICK_UP_PACKAGE": {
+    "PICK_UP": "pick up A -- $FullSiteName",
+    "FOR_YOUR_ORDER": "For your order $OrderNo",
+    "SINCERELY_SORRY_FOR": "Sincerely sorry for the inconvenience caused.",
+    "THE_PACKAGE_HAS_BEEN_SENT": "The package has been sent out. According to the tracking information, it is in your country now.",
+    "COULD_YOU_PLEASE_CONTACT": "Could you please contact you local service station（P：$Phone）to get more information about your package（ tracking No. $ExpressNo and link :  https://t.17track.net/en ）?",
+    "HOPE_YOU_GET": "Hope you get it soon.",
+    "HAVE_A_NICE_DAY": "Have a nice day."
+  },
+  "COD": {
+    "YOU_ORDER_HAS_BEEN": "Your Order Has Been Placed Successfully",
+    "YOU_ORDER_HAS_BEEN_PLACED_SUCCESSFULLY": "Your Order Has Been Placed Successfully. Order number $!{order.orderNo}. The parcel will takes about 7 to 25 days to your place after we send the order out. An email with tracking information will be sent to you once the order is shipped out.",
+    "NOTE": "Note:",
+    "CASH_ON_DELIVERY": "* Cash On Delivery",
+    "PLEASE_PAY_WHEN": "* Please pay when the item reaches you",
+    "DO_NOT_BE": "* Do not be fooled by fraudsters who trick you into transferring money in any channels.",
+    "WE_PROVIED_CASH": "* We provide Cash On Delivery service only."
+  },
+  "DELAY_IN_DELIVERY": {
+    "PER_SALE": "Pre-Sale Item Delay",
+    "DEAR": "Dear",
+    "THANK_YOU_SHIPPING": "Thank you for shopping at $!{SITE.name}",
+    "FOR_THIS": "For this pre-sale item due to some unforeseeable issue, there will be a slight delay in shipping out this order.",
+    "WE_APOLOGIZE": "We apologize for the delay and would like to offer you a voucher for the inconvenience $!{SITE.contactEmail}.",
+    "WE_APPRECIATE": "We appreciate your understanding on this matter. You will receive a notification once the item is ready for shipping. ",
+    "THANK_YOU": "Thank you for choosing $!{SITE.name}",
+    "SINCERELY": "Sincerely, $!{SITE.name}"
+  },
+  "REPUTATION_THIRD_COMMENT_COUPON": {
+    "THIRD_COMMENT_COUPON_TITLE": "Congratulations! A chance to get $!{couponMoney} coupon!",
+    "DEAR": "Dear ",
+    "REPUTATION_THIRD_COMMENT_DES1": "Enjoy your online shopping experience on $!{SITE.name},We have one more big surprise for you! You have a chance to get altogether $!{couponMoney} Coupon!",
+    "COUPON1": "Coupon1: ",
+    "REPUTATION_THIRD_COUPON1_DES1": "If you can share your nice online shopping experience on $!{SITE.name} to trustpilot, and submit a screenshot of your review to us. You will get a $!{coupon1Money} Coupon!",
+    "REPUTATION_THIRD_COUPON1_DES2": "Click the link below to share your nice experience on $!{SITE.name}：",
+    "REPUTATION_THIRD_COUPON1_DES3": "Click the link below to upload screenshot of your trustpilot review to us: ",
+    "COUPON2": "Coupon2:",
+    "REPUTATION_THIRD_COUPON2_DES1": "If you can share your nice online shopping experience on $!{SITE.name} to our website, You will also get a$!{coupon2Money} Coupon!",
+    "REPUTATION_THIRD_COUPON2_DES2": "Click the product below you would like to share experience on: ",
+    "TABLE_HEAD1": "project",
+    "TABLE_HEAD2": "unit price",
+    "TABLE_HEAD3": "Quantity",
+    "TABLE_HEAD4": "Total project price"
+  },
+  "REPUTATION_COMMENT_COUPON": {
+    "REPUTATION_COMMENT_COUPON_TITLE": "Here's your coupon! Get your style home now!",
+    "DEAR": "Dear ",
+    "REPUTATION_COMMENT_DES1": "Congratulations! You have successfully get the following coupon for $!{siteName}",
+    "REPUTATION_COMMENT_DES2": "You can use the coupon now! Get it home if you love any of these!"
+  },
+  "PACKAGE_DELAY": {
+    "TITLE": "D0610: Notification of order delay - ID: [$order_id]",
+    "DEAR": "Dear ",
+    "HOPE_U_DOING_WELL": "Hope you are doing well today.",
+    "ARRIVED_TIME": "Your package has already arrived your country at $amount local time.",
+    "TRACK_NUMBER": "This is the tracking number: ($site_urlcom)",
+    "TRACK_SITE": "You can track it by this link:  <a href=\"https://www.17track.net/en\">https://www.17track.net/en</a>",
+    "DELIVERY_SEEMS_TO_BE_SOME_REASON": "However, the last mile delivery seems to be delayed due to some unexpected reason.",
+    "WE_ARE_TRYING_TO_ARRANGE_SHIPPING": "We are still trying our best to arrange the shipping and make sure you can get it soon.",
+    "YOUR_PATIENCE_APPREICATED": "Your patience will be most appreicated.",
+    "REGARDS": "Regards",
+    "THE_TEAM": "The $site_url Team",
+    "CASE_NO": "Case no: $order_sn"
+  },
+  "REFUN_TO_CUSTOMER_CREATE_CASH": {
+    "TITLE": "Regarding Order Cancellation - ID: $order_id",
+    "HELLO": "Hello",
+    "TANK_YOU_FOR_RECENT_PURCHASE": "Thank you for your recent purchase with us.",
+    "SORRY_INFORM_CANCEL_SUPPLIER": "Sorry to inform you that we have to cancel your order due to the delay of our supplier.",
+    "IN_EFFORTS_TO_MAKE_OFFER_YOU": "In efforts to make it up for you, we would like to offer you this：",
+    "AMOUNT_COUPON_ORDER_AMOUNT": "$amount cash coupon (additional 15% more than your original order amount)",
+    "SIMPLY_YOU_WILL_IMMEIDATELY": "Simply click <a href=\"$site_urlcom\" style=\"font-weight:bold;font-size:16px;\">here</a> and you will receive the coupon code immeidately.",
+    "REGARDS": "Regards",
+    "THE_TEAM": "The $site_url Team",
+    "CASE_NO": "Case no: $order_sn"
+  },
+"FOR_NEW_SUBSCRIBER": {
+  "TITLE":"For New Subscriber!",
+  "CODE":"CODE",
+  "COUPON":"$!{followCoupon}",
+  "THANK_YOU_FOR_CREATING_YOUR_ACCOUNT_WELCOME": "Thanks for creating an account at $!{SITE.capDomain}, and welcome！<br>Login: $!{user.email}<br><br>If you want to reset your password, please <a href=\"$!{recoverUrl}\">click here</a> to proceed."
+},
+    
+    "REGISTER_SUBSCRIBE":{
+        "SUBSCRIBE_SUCCESSFULLY":"Subscribe successfully! Check your coupon inside this email>>>",
+        "WELCOME_TO":"Welcome to $!{SITE.capName}! Here is your new user bonus!",
+
+        "TOP_PICKS":"TOP PICKS",
+        "SHOW_NOW":"SHOP NOW",
+        "ONE_LAST_STEP":"One last step!",
+        "SUBSCRIBE_TO_OUR_NEWSLETTER_WILL_GET":"Subscribe to our newsletter will get an extra 15% discount!",
+        "SUBSCRIBE_NOW":"Subscribe Now",
+        "NEW_FRIENDS_GET_EXTRA":"New Friends get extra 10%-off coupon!",
+
+        "SUBSCRIBE_POPPPIE":"<img style='width: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520u51737a7fc41d4956ac9c9b13365b177c.png'/>",
+        "REGISTER_SUBSCRIBE_POPPPIE":"<img style='width: 100%;' src='https://ups.aopcdn.com/s894/common/19081/1282uc48c95852c3e47279e8da208bcc53fab.png'/>",
+        "REGISTER_NO_SUBSCRIBE_POPPPIE":"<img style='width: 100%;margin-bottom:5px' src='https://ups.aopcdn.com/s894/common/19081/1282ud63a2806d0524fcda8bf82eb16adb162.png'/>",
+        
+        "REGISTER_SUBSCRIBE_GIRL":"<img style='width: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520ucfa2249284334c85ae682151e570e963.png'/>",
+        "REGISTER_SUBSCRIBE_BOY":"<img style='width: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520u05c8ad9ec46b4f399f720e9d54b17667.png'/>",
+        "REGISTER_SUBSCRIBE_FAMILY":"<img style='width: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520u9e44bb1d82184557a51a9d897588a6a3.png'/>",
+        "REGISTER_SUBSCRIBE_MOM":"<img style='width: 100%;' src='https://ups.aopcdn.com/s-2/common/19079/1520ubf2f1e2d120c49079045b905ec336ec1.png'/>"
+    },
+  
+  "NEW_UNPAID_ORDERS": {
+    "TITLE_ONE": "Did you forget something?",
+    "NOTICED_COMMPLET_ORDER_ONE":"We noticed you left $!{SITE.capName} without completing your order.<br>Complete your order now and enjoy $!{SITE.discountRate} OFF! ",
+    "COUNT_DOWN_ONE":"Hurry, this offer expires in 30 minutes!",
+
+    "TITLE_TWO": "It looks like you left something behind…",
+    "NOTICED_COMMPLET_ORDER_TWO":"The items you left in your cart are flying out of stock. We saved the last ones for you.",
+    "COME_BACK_AND_GET":"Come back and get your favorites with 20% OFF discount.",
+    "COUNT_DOWN_TWO":"Complete your order before the time runs out.",
+
+    "TITLE_THREE": "Your $!{SITE.discountRate} offer expires soon…",
+    "NOTICED_COMMPLET_ORDER_THREE":"Last chance!<br>Your shopping cart at $!{SITE.capName} has been reserved and is waiting for your return! Checkout with $!{SITE.discountRate} OFF now!",
+    "COUNT_DOWN_THREE":"Offer expires in 30 minutes. Hurry!",
+
+    "CHECK_TO_PAY":"CHECK TO PAY",
+    "UNSUBSCRIBE":"UNSUBSCRIBE",
+    "CONTACT_US":"CONTACT US",
+    "TRACK_ORDER":"TRACK ORDER",
+    "CANCEL_ORDER":"CANCEL ORDER",
+    "SECURED_PAYMENTS":"100% Secured Payments",
+    "CUSTOMER_SERVICE_MAIL":"Customer Service Mail",
+    "VARIETY_OF_DAILY_CLOTHING":"Variety Of Daily Clothing",
+    "AFTER_PAYMENT":"After Payment, We will begin processing your order as soon as possible.",
+    "THE_TEAM": "$!{SITE.capName} Team"
+  },
+    
+    "DISPUTE_TEMPLATE": {
+        "I_AM_YOUR_DEDICATED_SERVICE_SPECIALIST":"I am your dedicated service specialist, my name is Molly, nice to meet you.",
+        "GLAD_TO_EMAIL_YOU_AGAIN":"Glad to email you again.",
+        
+        "I_CHECKED_YOUR_ORDER_STATUS_1":"I checked your order $!{order_sn} status. It shows that you want to change something in your order.Please reply to this email and let me know the size, color or shipping method you want to change.We will arrange for you ASAP.",
+        "I_CHECKED_YOUR_ORDER_STATUS_2":"I checked your order $!{order_sn} status. It shows that you want to change size in your order. Please reply to this email and let me know the size you want to change. We will arrange for you ASAP.",
+        "I_CHECKED_YOUR_ORDER_STATUS_3":"I checked your order $!{order_sn} status. It shows that you need to change the address information. Please reply to this email and tell us about your address details. We will amend it and arrange the shipment ASAP.",
+        "I_CHECKED_YOUR_ORDER_STATUS_4":"I checked your order $!{order_sn} status. It shows that you need to change the delivery method. Please reply to this email and tell us what delivery method you want to change. We will change for you and arrange the shipment ASAP.Thank you.",
+        "I_CHECKED_YOUR_ORDER_STATUS_5":"For your order $!{order_sn},do you want to cancel it? I am so sorry to hear that, I think we still need to improve our product and service in the future, so sorry for any inconvenience caused on this case.<br>Actually your product was packed & process by logistics, so we are glad to hope you keep the order, we will offer 15% off discount to you as our customer delight. Please reply to this email to get the coupon code.",
+        "AS_FOR_YOUR_DISPUTED_ORDER":"As for your disputed order $!{order_sn}, we are sorry that we did not receive your reply yet. As for the question mentioned before, we hope to receive your reply and then we can proceed your order as soon as possible. ",
+        "AS_FOR_YOUR_DISPUTED_ORDER_2":"About your previous disputed order $!{order_sn}， we didn't get your reply yet, also we still keep the goods for you, because product is now sell like hot cakes, inventory is running out, therefore, we hope to receive your reply and then we can continue to proceed your order, we are looking forward to hear from you.",
+
+        "IF_YOU_HAVE_ANY_OTHER_CONCERN":"If you have any other concern, please let me know. Thank you.",
+        "PLEASE_CONTACT_US_IF_ANY_QUERY":"Please contact us if any query, thank you.",
+
+        "FRIENDLY_REMINDER":"(Friendly reminder: some additional fee will be charged by logistic, please pay attention ). "
+  },
+
+"CANCELLATION_ORDER":{
+  "PACKAGE_ORDER":"Package information update regarding to your order id $order_sn",
+  "CANCELLATION_OF_ORDER":"Cancellation of order id $order_sn",
+
+  "CANCELLATION_OF_ORDER_ID": "Cancellation of order ID: $order_sn",
+  "THANK_YOU_FOR_YOUR_SHOPPING": "Thank you for shopping with us! We apologize for canceling your order id.$order_sn due to the reason: XXX",
+  "CUSTOMER_SERVICES": "Below are the information of order id.$order_sn. For any details of the cancellation, please feel free to contact us via service@popopie.com.",
+  "WELCOME_TO_SHOP_AGAIN": "Welcome to shop again.",
+  "LIMITED_STOCK":"limited stock.",
+  "INVALID_ADDRESS":"Incomplete delivery information or invalid address.",
+  "PACKAGE_RETURNED":"Package is returned due to the custom regulations.",
+  "HIGH_RISK_TRANSACTION":"Unsuccessfully payment or suspected high risk transaction.",
+  "CUSTOMER_REQUEST":"Cancellation requests from customer.",
+  
+  "HI":"Hi $!{first_name},",
+  "PACKAGE": "package",
+  "ORDER": "Order",
+  "ITEM": "Item",
+  "STATUS": "Status",
+  "SHIPPED": "Shipped",
+  "VIEW_MY_ORDER": "View my order",
+  "PROCESSING": "Processing",
+  "TRACK_MY_ORDER": "Track my order",
+  
+  "THANK_YOU_FOR_SHOPPING_WITH_US": "Thank you for shopping with us! For a fast delivery, we split your order into multiple package(s) and shipped the available item(s) first.<br> You won't be charged for any additional shipping costs. ",
+  "BELOW_ARE_THE_PACKAGE_INFORMATION": "Below are the package information. If you have any questions, please contact us via <a href='mailto:$!{SITE.contactEmail}' style='color: $SITE.color'>$!{SITE.contactEmail}</a>. ",
+  "OTHER_ITEMS_ARE_BEING_PACKAGED": "Other items are being packaged and will be shipped soon. You will receive an email notification after delivery. Please check the email carefully."
+},
+"EVALUATION_OF_ARRIVED_GOODS": {
+  "REFUND_BEING_TITLE": "We sincerely invite you to share your shopping experience",
+  "WISH_YOU_ARE_FAVOR": "Wish you are favor for items bought from us and look forward to serving you again. We would love to invite you to share your shopping experience and reviews on our website or via our social platforms. We will also provide a $10 cupon for your next purchase.",
+  "IF_WE_DID_NOT_MEET_YOUR_EXPECTATION": "Unfortunately, if we did not meet your expectation, please contact us at anytime so as to clear up your discontent and resolve the problem.",
+  "MANY_THANKS_AND_HOPE": "Many thanks and hope you enjoy shopping with us.",
+  "THE_TEAM": "$site_url Team"
+},
+"KLARNA":{
+"KLARNATEXT":"Payment for this order was made using Klarna. To view the order and repayment methods, please click the link to contact Klarna customer service.",
+"KLARNACONTACT":"24 hours customer service consultation.",
+"KLARNAAPP":"Get the Klarna app ->"
+}
+}
+  </script>
+
+  <script>
+    function flattenObject(obj, _key) {
+      const flattened = {};
+      Object.keys(obj).forEach(key => {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+          Object.assign(flattened, flattenObject(obj[key], key));
+        } else {
+          flattened[`${_key ? (_key + '.') : ''}${key}`] = obj[key];
+        }
+      });
+      return flattened;
+    }
+    var _data_en = flattenObject(data_en)
+    var _data_nl = flattenObject(data_nl)
+    // console.log(data_en, data_nl)
+    // const regex = new RegExp('\$\!\{.*?\}', 'g')
+    const regex = /(\$\!\{[a-zA-Z0-9\-\_\.]+\})|(\$[a-zA-Z0-9\-\_\.]+)/g;
+    // 
+    // const matches = str.match(regex);
+    var data = Object.keys(_data_en).filter(key => {
+      if(_data_en[key].indexOf('$') > -1){
+        // console.log(_data_en[key], _data_nl[key])
+        // console.log(_data_en[key].match(regex));
+        var en = _data_en[key].match(regex)
+        var nl = _data_nl[key].match(regex)
+        // console.log(en, nl);
+        if(!en || !nl || en.join() != nl.join()){
+          console.log(en, nl );
+          console.log(key, _data_en[key], _data_nl[key]);
+        }
+        // if(.join() !== _data_nl[key].match(regex).join()){
+        //   console.log(key);
+        // }
+      }
+    })
+  </script>
+
+
+
+  <div class="policy rte" itemprop="policy">
+    <div class="policy_item">
+      <img src="https://cdn.shopify.com/s/files/1/0734/0202/4223/files/1.png?v=1680257491" alt="">
+      <div class="policy_item_content">
+        <div>CHAT WITH US</div>
+        <p>24/7 contact us：support@bikerfavor.com</p>
+      </div>
+    </div>
+    <div class="policy_item">
+      <img src="https://cdn.shopify.com/s/files/1/0734/0202/4223/files/2.png?v=1680257492" alt="">
+      <div class="policy_item_content">
+        <div>FREE SHIPPING</div>
+        <p>Free shipping on order $79</p>
+        <p>10-20 business days, <a href="https://www.bikerfavor.com/pages/shipping-delivery" target="_blank">See detail</a></p>
+      </div>
+    </div>
+    <div class="policy_item">
+      <img src="https://cdn.shopify.com/s/files/1/0734/0202/4223/files/3.png?v=1680257491" alt="">
+      <div class="policy_item_content">
+        <div>RETURNS POLICY</div>
+        <p>Flexible returns, <a href="https://www.bikerfavor.com/pages/shipping-delivery" target="_blank">See detail</a></p>
+      </div>
+    </div>
+    <div class="policy_item">
+      <img src="https://cdn.shopify.com/s/files/1/0734/0202/4223/files/4.png?v=1680257492" alt="">
+      <div class="policy_item_content">
+        <div>PAYMENT</div>
+        <p>
+          <img src="https://cdn.shopify.com/s/files/1/0734/0202/4223/files/f1e052fc3f19b3c0bf6479b1c7f772a2_1_700x_b8ce2951-cfcc-4eba-a27f-2241d66e3c9a.png?v=1680257492" alt=""  >
+        </p>
+      </div>
+    </div>  
+  </div>
+  <style>
+    .policy {
+      max-width: 420px;
+      margin-top: 25px;
+      background-color: #f7f8fa;
+      padding: 20px;
+      padding-top: 0;
+    }
+  
+    .policy .policy_item {
+      padding-top: 20px;
+      display: flex;
+    }
+  
+    .policy .policy_item>img {
+      width: 32px;
+      height: 32px;
+      margin-right: 6px;
+    }
+  
+    .policy .policy_item .policy_item_content {
+      flex: 1;
+    }
+  
+    .policy .policy_item .policy_item_content div {
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  
+    .policy .policy_item .policy_item_content p {
+      margin: 0;
+      font-size: 12px;
+      color: #767676;
+    }
+  
+    .policy .policy_item .policy_item_content img {
+      width: 100%;
+    }
+  </style>
+
+
+</body>
+</html>
