@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/konva@4.0.0/konva.min.js"></script>
+    <meta charset="utf-8">
+    <title>Konva Rotation Animation Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F0F0F0;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height
+    });
+
+    var layer = new Konva.Layer();
+    stage.add(layer);
+    
+    // var ImageYoda = new Image();
+    // ImageYoda.onload = function(){
+    //     var kImage1 = new Konva.Image({
+    //         image: ImageYoda,
+    //         x: 200,
+    //         y: 200,
+    //         width: ImageYoda.width,
+    //         height: ImageYoda.height,
+    //         offset:{    // offset的设置是使得围绕中心旋转
+    //             x: ImageYoda.width/2,   
+    //             y: ImageYoda.height/2
+    //         },
+    //         rotation: 90
+    //     });
+        
+    //     layer.add(kImage1);
+        
+    //     var kImage2 = new Konva.Image({
+    //         image: ImageYoda,
+    //         x: 500,
+    //         y: 200,
+    //         width: ImageYoda.width,
+    //         height: ImageYoda.height,
+    //         offset:{
+    //             x: ImageYoda.width/2,
+    //             y: ImageYoda.height/2
+    //         }
+    //     });
+        
+    //     layer.add(kImage2);
+        
+    //     var kImage3 = new Konva.Image({
+    //         image: ImageYoda,
+    //         x: 800,
+    //         y: 200,
+    //         width: ImageYoda.width,
+    //         height: ImageYoda.height,
+    //         offset:{
+    //             x: ImageYoda.width/2,
+    //             y: ImageYoda.height/2
+    //         }
+    //     });
+        
+    //     layer.add(kImage3);
+        
+    //     // one revolution per 4 seconds
+    //     var triggerTime = -1000;
+    //     var scale = 1;
+    //     var angularSpeed = 190;
+    //     var anim = new Konva.Animation(function(frame) {
+    //         if (frame.time - triggerTime < 1000){
+    //             return false;
+    //         }
+            
+    //         triggerTime = frame.time;
+            
+    //         var angleDiff = frame.timeDiff * angularSpeed / 1000;
+    //         scale *= -1;
+    //         kImage1.rotate(angleDiff);          // 旋转
+    //         kImage2.scale({x: scale, y: 1});    // 左右镜像
+    //         kImage3.scale({x: 1, y: scale});    // 上下翻转
+    //     }, layer);
+    
+    //     anim.start();
+    // }
+    
+    // ImageYoda.src = 'http://konvajs.github.io/assets/yoda.jpg';
+    
+
+    var kText = new Konva.Text({
+        text: "塞德里克感觉啊VB啊沙发里DHV巴萨单发狙    ",
+        // text: "测试\ncs\n艾尔@#@！（*（……*&",
+        x: 200,
+        y: 200,
+        fontSize: 16,
+        fontFamily: "monospace",
+        fill: '#000',
+    });
+    
+    layer.add(kText);
+
+</script>
+
+</body>
+</html>
