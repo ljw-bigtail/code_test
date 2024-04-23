@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECharts 三角锥示例</title>
+  <!-- 引入 ECharts -->
+  <script src="./echarts.min.js"></script>
+</head>
+<body>
+  <!-- ECharts 容器 -->
+  <div id="main" style="width: 600px; height: 400px;"></div>
+  <script>
+    // 初始化 ECharts 实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 自定义系列
+    echarts.registerCustomSeries('triangle', {
+      type: 'custom',
+
+      // 绘制图形
+      render: function (seriesModel, ecModel, api) {
+        var coordSys = seriesModel.coordinateSystem;
+        var data = seriesModel.getData();
+
+        // 绘制三角锥
+        data.each(function (idx) {
+          var triangleShape = echarts.graphic.extendShape({
+            shape: {
+              points: [
+                [api.getWidth() / 2, 10],
+                [10, api.getHeight() - 10],
+                [api.getWidth() - 10, api.getHeight() - 10]
+              ]
+            },
+            style: {
+              fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: '#29DDFF' },
+                { offset: 1, color: 'rgba(41,221,255,0.16)' }
+              ]),
+              stroke: '#000'
+            }
+          });
+          triangleShape.x = api.getWidth() / 2;
+          triangleShape.y = 0;
+
+          // 添加三角锥到绘图树
+          api.getZr().add(triangleShape);
+        });
+      }
+    });
+
+    // 指定图表的配置项和数据
+    var option = {
+      series: [
+        {
+          type: 'triangle',
+          data: [1] // 用一个数据项表示一个三角锥
+        }
+      ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
